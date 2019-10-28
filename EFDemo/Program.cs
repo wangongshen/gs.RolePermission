@@ -122,6 +122,39 @@ namespace EFDemo
             //Console.ReadKey();
             //#endregion
 
+            //#region 批量添加
+            //DataModelContainer dmc = new DataModelContainer();
+            //for (int i = 0; i < 8; i++)
+            //{
+            //    UserInfo user = new UserInfo();
+            //    user.Uname = "王五" + i;
+            //    user.Pwd = "12345678";
+            //    user.ShowName = "wang" + i;
+            //    dmc.UserInfo.Add(user);
+            //}
+            //dmc.SaveChanges();
+            //Console.WriteLine("批量添加成功");
+            //Console.ReadKey();
+            //#endregion
+
+            //#region foreach遍历
+            //DataModelContainer dmc = new DataModelContainer();
+            //foreach (var user in dmc.UserInfo)
+            //{
+            //    Console.WriteLine("姓名："+user.Uname);
+            //}
+            //Console.ReadKey();
+            //#endregion
+
+            #region foreach遍历
+            DataModelContainer dmc = new DataModelContainer();
+            var data = from u in dmc.UserInfo where u.Id < 6 && u.Uname.StartsWith("z") select u;
+            foreach (var user in data)
+            {
+                Console.WriteLine("编号："+user.Id+"/n姓名：" + user.Uname);
+            }
+            Console.ReadKey();
+            #endregion
 
         }
     }
