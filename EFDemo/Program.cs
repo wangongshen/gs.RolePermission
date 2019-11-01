@@ -177,23 +177,77 @@ namespace EFDemo
             //#endregion
 
 
-            #region 多表查询,通过Include方法取消延迟加载，进行表连接查询，数据量小的时候采用
+            //#region 多表查询,通过Include方法取消延迟加载，进行表连接查询，数据量小的时候采用
+            //DataModelContainer dbCotent = new DataModelContainer();
+            ////用Include即进行了表连接查询，取消了延迟加载
+            //var temp = from u in dbCotent.UserInfo.Include("OrderInfo")
+            //           where u.Id < 15
+            //           select u;
+            ////通过导航属性多表查询,没有进行表连接查询
+            //foreach (var user in temp)
+            //{
+            //    foreach (var orderInfo in user.OrderInfo)
+            //    {
+            //        Console.WriteLine(user.Uname + "  " + orderInfo.Id + "  " + orderInfo.Content);
+            //    }
+            //}
+            //Console.ReadKey();
+            //#endregion
+
+            #region Linq to Object查询
+            //这里加了ToList，就会先转换为List集合，这条语句就不是Linq to EF，
+            //而是Linq to Object。ToList()就会把所有数据加载到内存，然后再根据下面的where条件过滤，
+            //即为内存里过滤：就是把数据库中的所有数据查询到程序里面来之后，
+            ////再进行过滤，如果数据库中数据庞大，内存就会爆掉
+            //DataModelContainer dbCotent = new DataModelContainer();
+            //var temp =from u in dbCotent.UserInfo.ToList()
+            //          where u.Id>5
+            //          select u;
+            //foreach (var item in temp)
+            //{
+            //    Console.WriteLine("姓名："+item.Uname);
+            //}
+            //Console.ReadKey();
+            #endregion
+
+            #region  Lambda查询
+            //DataModelContainer dbCotent = new DataModelContainer();
+            //var temp = dbCotent.UserInfo.Where((a)=>a.Id>8);
+            //foreach (var item in temp)
+            //{
+            //    Console.WriteLine("姓名：" + item.Uname);
+            //}
+            //Console.ReadKey();
+            #endregion
+
+            #region  Lambda分页查询 
+            //DataModelContainer dbCotent = new DataModelContainer();
+            //var temp = dbCotent.UserInfo.Where(a => a.Id > 0)
+            //    .OrderBy(a=>a.Id)
+            //    .Skip(2*(3-1))
+            //    .Take(2);
+            //foreach (var item in temp)
+            //{
+            //    Console.WriteLine("编号："+item.Id+"姓名：" + item.Uname);
+            //}
+            //Console.ReadKey();
+            #endregion
+
+
+            #region  Lambda分页查询 
             DataModelContainer dbCotent = new DataModelContainer();
-            //用Include即进行了表连接查询，取消了延迟加载
-            var temp = from u in dbCotent.UserInfo.Include("OrderInfo")
-                       where u.Id < 15
-                       select u;
-            //通过导航属性多表查询,没有进行表连接查询
-            foreach (var user in temp)
+            var temp = (from u in dbCotent.UserInfo
+                        where u.Id > 3
+                        orderby u.Id 
+                        select u
+                      ).Skip(3 * (3 - 1)).Take(3);
+
+            foreach (var item in temp)
             {
-                foreach (var orderInfo in user.OrderInfo)
-                {
-                    Console.WriteLine(user.Uname + "  " + orderInfo.Id + "  " + orderInfo.Content);
-                }
+                Console.WriteLine("编号：" + item.Id + "姓名：" + item.Uname);
             }
             Console.ReadKey();
             #endregion
-
         }
     }
 }
