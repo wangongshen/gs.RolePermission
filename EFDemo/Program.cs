@@ -12,7 +12,7 @@ namespace EFDemo
     {
         static void Main(string[] args)
         {
-            //#region 添加 1
+            #region 添加 1
             ////添加数据 EF上下文要对上面的实体做插入操作，要添加对EntityFramework.dll和EntityFramework.SqlServer.dll的引用
             //DataModelContainer dmc = new DataModelContainer();
             //UserInfo user = new UserInfo();
@@ -23,9 +23,9 @@ namespace EFDemo
             //dmc.SaveChanges();
             //Console.WriteLine("添加成功");
             //Console.ReadKey();
-            //#endregion
+            #endregion
 
-            //#region 添加 2
+            #region 添加 2
             ////添加数据 EF上下文要对上面的实体做插入操作，要添加对EntityFramework.dll和EntityFramework.SqlServer.dll的引用
             //DataModelContainer dmc = new DataModelContainer();
             //UserInfo user = new UserInfo();
@@ -37,10 +37,10 @@ namespace EFDemo
             //dmc.SaveChanges();
             //Console.WriteLine("添加成功");
             //Console.ReadKey();
-            //#endregion
+            #endregion
 
 
-            //#region 添加 3
+            #region 添加 3
             ////添加数据 EF上下文要对上面的实体做插入操作，要添加对EntityFramework.dll和EntityFramework.SqlServer.dll的引用
             //DataModelContainer dmc = new DataModelContainer();
             //UserInfo user = new UserInfo();
@@ -63,9 +63,9 @@ namespace EFDemo
             //dmc.SaveChanges();
             //Console.WriteLine("添加成功");
             //Console.ReadKey();
-            //#endregion
+            #endregion
 
-            //#region 修改全部字段 1
+            #region 修改全部字段 1
             ////添加数据 EF上下文要对上面的实体做插入操作，要添加对EntityFramework.dll和EntityFramework.SqlServer.dll的引用
             //DataModelContainer dmc = new DataModelContainer();
             //UserInfo user = new UserInfo();
@@ -79,9 +79,9 @@ namespace EFDemo
             //dmc.SaveChanges();
             //Console.WriteLine("修改成功");
             //Console.ReadKey();
-            //#endregion
+            #endregion
 
-            //#region 修改部分字段 1
+            #region 修改部分字段 1
             ////添加数据 EF上下文要对上面的实体做插入操作，要添加对EntityFramework.dll和EntityFramework.SqlServer.dll的引用
             //DataModelContainer dmc = new DataModelContainer();
             //UserInfo user = new UserInfo();
@@ -96,9 +96,9 @@ namespace EFDemo
             //dmc.SaveChanges();
             //Console.WriteLine("修改成功");
             //Console.ReadKey();
-            //#endregion
+            #endregion
 
-            //#region 删除 1
+            #region 删除 1
             ////添加数据 EF上下文要对上面的实体做插入操作，要添加对EntityFramework.dll和EntityFramework.SqlServer.dll的引用
             //DataModelContainer dmc = new DataModelContainer();
             //UserInfo user = new UserInfo();
@@ -108,9 +108,9 @@ namespace EFDemo
 
             //Console.WriteLine("删除成功");
             //Console.ReadKey();
-            //#endregion
+            #endregion
 
-            //#region 删除 1
+            #region 删除 1
             ////添加数据 EF上下文要对上面的实体做插入操作，要添加对EntityFramework.dll和EntityFramework.SqlServer.dll的引用
             //DataModelContainer dmc = new DataModelContainer();
             //UserInfo user = new UserInfo();
@@ -120,9 +120,9 @@ namespace EFDemo
             //dmc.SaveChanges();
             //Console.WriteLine("删除成功");
             //Console.ReadKey();
-            //#endregion
+            #endregion
 
-            //#region 批量添加
+            #region 批量添加
             //DataModelContainer dmc = new DataModelContainer();
             //for (int i = 0; i < 8; i++)
             //{
@@ -135,9 +135,9 @@ namespace EFDemo
             //dmc.SaveChanges();
             //Console.WriteLine("批量添加成功");
             //Console.ReadKey();
-            //#endregion
+            #endregion
 
-            //#region foreach遍历
+            #region foreach遍历
             //DataModelContainer dmc = new DataModelContainer();
             //foreach (var user in dmc.UserInfo)
             //{
@@ -154,9 +154,9 @@ namespace EFDemo
             //    Console.WriteLine("编号："+user.Id+"/n姓名：" + user.Uname);
             //}
             //Console.ReadKey();
-            //#endregion
+            #endregion
 
-            //#region 延迟加载，用到的时候才去查询数据库
+            #region 延迟加载，用到的时候才去查询数据库
             //DataModelContainer dbCotent = new DataModelContainer();
 
             //var temp1 = from u in dbCotent.UserInfo
@@ -174,10 +174,10 @@ namespace EFDemo
             //    Console.WriteLine(user.Id + "  " + user.Uname);
             //}
             //Console.ReadKey();
-            //#endregion
+            #endregion
 
 
-            //#region 多表查询,通过Include方法取消延迟加载，进行表连接查询，数据量小的时候采用
+            #region 多表查询,通过Include方法取消延迟加载，进行表连接查询，数据量小的时候采用
             //DataModelContainer dbCotent = new DataModelContainer();
             ////用Include即进行了表连接查询，取消了延迟加载
             //var temp = from u in dbCotent.UserInfo.Include("OrderInfo")
@@ -192,7 +192,7 @@ namespace EFDemo
             //    }
             //}
             //Console.ReadKey();
-            //#endregion
+            #endregion
 
             #region Linq to Object查询
             //这里加了ToList，就会先转换为List集合，这条语句就不是Linq to EF，
@@ -234,17 +234,46 @@ namespace EFDemo
             #endregion
 
 
-            #region  Lambda分页查询 
+            #region  Linq分页查询 
+            //DataModelContainer dbCotent = new DataModelContainer();
+            //var temp = (from u in dbCotent.UserInfo
+            //            where u.Id > 3
+            //            orderby u.Id 
+            //            select u
+            //          ).Skip(3 * (3 - 1)).Take(3);
+
+            //foreach (var item in temp)
+            //{
+            //    Console.WriteLine("编号：" + item.Id + "姓名：" + item.Uname);
+            //}
+            //Console.ReadKey();
+            #endregion
+
+            #region  Linq查询部分 
+            //DataModelContainer dbCotent = new DataModelContainer();
+            //var temp = (from u in dbCotent.UserInfo
+            //            where u.Id > 3
+            //            orderby u.Id
+            //            select new { u.Id,u.Uname,aaa=u.Id}
+            //          ).Skip(3 * (3 - 1)).Take(3);
+
+            //foreach (var item in temp)
+            //{
+            //    Console.WriteLine("编号：" + item.Id + "姓名：" + item.Uname+"aaa:"+item.aaa);
+            //}
+            //Console.ReadKey();
+            #endregion
+
+
+            #region  Lambda查询部分 
             DataModelContainer dbCotent = new DataModelContainer();
-            var temp = (from u in dbCotent.UserInfo
-                        where u.Id > 3
-                        orderby u.Id 
-                        select u
-                      ).Skip(3 * (3 - 1)).Take(3);
+            var temp = dbCotent.UserInfo.Where(a=>a.Id>8)
+                       .OrderBy(a=>a.Id)
+                       .Select(a=>new {a.Id,a.Uname,aaa=a.Uname });
 
             foreach (var item in temp)
             {
-                Console.WriteLine("编号：" + item.Id + "姓名：" + item.Uname);
+                Console.WriteLine("编号：" + item.Id + "姓名：" + item.Uname + "aaa:" + item.aaa);
             }
             Console.ReadKey();
             #endregion
