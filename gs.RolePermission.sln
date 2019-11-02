@@ -27,6 +27,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demos", "Demos", "{A5E4D79D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFDemo", "EFDemo\EFDemo.csproj", "{5012FD45-C13A-46FB-97C6-50DA96E8C55F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gs.RolePermission.DALTests", "gs.RolePermission.DALTests\gs.RolePermission.DALTests.csproj", "{BDA0BF40-B7D6-4F3A-9160-321075FA67EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTest", "UnitTest", "{48A6508C-7AD1-41E5-8AEB-A26658F674DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +61,10 @@ Global
 		{5012FD45-C13A-46FB-97C6-50DA96E8C55F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5012FD45-C13A-46FB-97C6-50DA96E8C55F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5012FD45-C13A-46FB-97C6-50DA96E8C55F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDA0BF40-B7D6-4F3A-9160-321075FA67EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDA0BF40-B7D6-4F3A-9160-321075FA67EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDA0BF40-B7D6-4F3A-9160-321075FA67EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDA0BF40-B7D6-4F3A-9160-321075FA67EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +76,7 @@ Global
 		{89183DA7-EE40-4258-9D02-FB181FDD4DA1} = {2FFAC8B4-D7B3-478E-AD0E-0F6F4D52DF2B}
 		{7EDDE252-DBD4-4C41-B4E1-C82549B7C1FC} = {C3BEBBFE-CFD0-4BE0-AF92-7B90A6D094EB}
 		{5012FD45-C13A-46FB-97C6-50DA96E8C55F} = {A5E4D79D-0C05-4B95-A0BE-268B89B37001}
+		{BDA0BF40-B7D6-4F3A-9160-321075FA67EF} = {48A6508C-7AD1-41E5-8AEB-A26658F674DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9A783FE9-33FA-4680-A9F6-5E493DAFEA7D}
