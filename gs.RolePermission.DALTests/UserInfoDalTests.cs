@@ -17,7 +17,7 @@ namespace gs.RolePermission.DAL.Tests
         {
             UserInfoDal dal = new UserInfoDal();
             UserInfo user = new UserInfo();
-            user.Uname = "曹操";
+            user.Uname = "曹操1103";
             user.Pwd = "123456";
             user.ShowName = "曹阿瞒";
             int sum = dal.Add(user);
@@ -28,7 +28,7 @@ namespace gs.RolePermission.DAL.Tests
         public void GetAllUserInfoTest()
         {
             UserInfoDal dal = new UserInfoDal();
-            var userList=dal.GetAllUserInfo();
+            var userList=dal.GetAllEntities();
             Console.WriteLine(userList.Count());
             Assert.AreEqual(true,15>userList.Count());
         }

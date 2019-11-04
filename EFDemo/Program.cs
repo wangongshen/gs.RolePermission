@@ -1,4 +1,5 @@
-﻿using gs.RolePermission.Model;
+﻿using gs.RolePermission.DALFactory;
+using gs.RolePermission.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -266,17 +267,25 @@ namespace EFDemo
 
 
             #region  Lambda查询部分 
-            DataModelContainer dbCotent = new DataModelContainer();
-            var temp = dbCotent.UserInfo.Where(a=>a.Id>8)
-                       .OrderBy(a=>a.Id)
-                       .Select(a=>new {a.Id,a.Uname,aaa=a.Uname });
+            //DataModelContainer dbCotent = new DataModelContainer();
+            //var temp = dbCotent.UserInfo.Where(a=>a.Id>8)
+            //           .OrderBy(a=>a.Id)
+            //           .Select(a=>new {a.Id,a.Uname,aaa=a.Uname });
 
-            foreach (var item in temp)
-            {
-                Console.WriteLine("编号：" + item.Id + "姓名：" + item.Uname + "aaa:" + item.aaa);
-            }
-            Console.ReadKey();
+            //foreach (var item in temp)
+            //{
+            //    Console.WriteLine("编号：" + item.Id + "姓名：" + item.Uname + "aaa:" + item.aaa);
+            //}
+            //Console.ReadKey();
             #endregion
+
+        
+            string aa = StaticDalFactory.aa();
+            Console.WriteLine("888:" + aa);
+            string assemblyName = System.Configuration.ConfigurationManager.AppSettings["DalAssemblyName"];
+            Console.WriteLine("9999111:" + assemblyName);
+            Console.ReadKey();
+
         }
     }
 }

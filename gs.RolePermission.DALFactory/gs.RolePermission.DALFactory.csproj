@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5012FD45-C13A-46FB-97C6-50DA96E8C55F}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>EFDemo</RootNamespace>
-    <AssemblyName>EFDemo</AssemblyName>
+    <ProjectGuid>{EEC0716B-1464-4133-99E8-F0E7C0959387}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>gs.RolePermission.DALFactory</RootNamespace>
+    <AssemblyName>gs.RolePermission.DALFactory</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,12 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -50,24 +42,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="StaticDalFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\gs.RolePermission.DALFactory\gs.RolePermission.DALFactory.csproj">
-      <Project>{EEC0716B-1464-4133-99E8-F0E7C0959387}</Project>
-      <Name>gs.RolePermission.DALFactory</Name>
+    <ProjectReference Include="..\gs.RolePermission.DAL\gs.RolePermission.DAL.csproj">
+      <Project>{8CE4D058-3742-4EC4-AF44-4ABE55D66026}</Project>
+      <Name>gs.RolePermission.DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\gs.RolePermission.Model\gs.RolePermission.Model.csproj">
-      <Project>{44D9891F-C26F-4200-A558-CBD203B0B235}</Project>
-      <Name>gs.RolePermission.Model</Name>
+    <ProjectReference Include="..\gs.RolePermission.IDAL\gs.RolePermission.IDAL.csproj">
+      <Project>{E3D40985-D9B2-48FC-B9D5-95CF548DD093}</Project>
+      <Name>gs.RolePermission.IDAL</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
+    <ProjectReference Include="..\gs.RolePermission.UI.Portal\gs.RolePermission.UI.Portal.vbproj">
+      <Project>{7edde252-dbd4-4c41-b4e1-c82549b7c1fc}</Project>
+      <Name>gs.RolePermission.UI.Portal</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
