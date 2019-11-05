@@ -20,11 +20,5 @@ namespace gs.RolePermission.DALFactory
             Console.WriteLine(",,,,:"+ assemblyName);
             return Assembly.Load(assemblyName).CreateInstance(assemblyName + ".UserInfoDal") as IUserInfoDal;
         }
-
-        public static string aa() {
-            string assemblyName = System.Configuration.ConfigurationManager.AppSettings["UnobtrusiveJavaScriptEnabled"];
-            Console.WriteLine("9999:"+assemblyName);
-            return assemblyName;
-        }
     }
 }

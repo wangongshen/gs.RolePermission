@@ -12,10 +12,10 @@ namespace gs.RolePermission.DALFactory.Tests
     public class StaticDalFactoryTests
     {
         [TestMethod()]
-        public void GetUserInfoDalTest()
+        public void GetUserInfoDalTest1()
         {
-           string aa= StaticDalFactory.aa();
-            Console.WriteLine("888:"+aa);
+            StaticDalFactory.GetUserInfoDal();
+
         }
     }
 }

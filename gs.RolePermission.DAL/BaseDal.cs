@@ -1,6 +1,7 @@
 ﻿using gs.RolePermission.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -14,7 +15,12 @@ namespace gs.RolePermission.DAL
     /// <typeparam name="T"></typeparam>
     public class BaseDal<T> where T:class,new() 
     {
-        DataModelContainer dmc = new DataModelContainer();
+        //DataModelContainer dmc = new DataModelContainer();
+        public DbContext dmc
+        {
+            //保证线程内共享一个上下文实例
+            get { return DbContentFactory.GetCurrentDbContent(); }
+        }
 
         /// <summary>
         /// 根据Id查询用户
@@ -23,7 +29,6 @@ namespace gs.RolePermission.DAL
         /// <returns></returns>
         public T GetTById(int id)
         {
-
             return dmc.Set<T>().Find(id);
         }
 

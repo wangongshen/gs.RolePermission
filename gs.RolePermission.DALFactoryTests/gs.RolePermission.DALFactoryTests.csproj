@@ -60,6 +60,7 @@
     <Compile Include="StaticDalFactoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +71,10 @@
     <ProjectReference Include="..\gs.RolePermission.IDAL\gs.RolePermission.IDAL.csproj">
       <Project>{E3D40985-D9B2-48FC-B9D5-95CF548DD093}</Project>
       <Name>gs.RolePermission.IDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gs.RolePermission.UI.Portal\gs.RolePermission.UI.Portal.vbproj">
+      <Project>{7edde252-dbd4-4c41-b4e1-c82549b7c1fc}</Project>
+      <Name>gs.RolePermission.UI.Portal</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

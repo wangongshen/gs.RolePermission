@@ -2,6 +2,7 @@
 using gs.RolePermission.Model;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -279,11 +280,8 @@ namespace EFDemo
             //Console.ReadKey();
             #endregion
 
-        
-            string aa = StaticDalFactory.aa();
-            Console.WriteLine("888:" + aa);
-            string assemblyName = System.Configuration.ConfigurationManager.AppSettings["DalAssemblyName"];
-            Console.WriteLine("9999111:" + assemblyName);
+
+            StaticDalFactory.GetUserInfoDal();
             Console.ReadKey();
 
         }
