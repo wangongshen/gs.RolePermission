@@ -23,4 +23,5 @@ namespace gs.RolePermission.DAL
             }
             return db;
         }
+    }
 }
