@@ -88,20 +88,11 @@ namespace gs.RolePermission.DAL
         /// </summary>
         /// <param name="T"></param>
         /// <returns></returns>
-        public int Add(T entity)
+        public bool Add(T entity)
         {
             dmc.Set<T>().Add(entity);
-            try
-            {
 
-                return dmc.SaveChanges();
-            }
-            catch (Exception)
-            {
-                return 0;
-                throw;
-            }
-
+            return true;
         }
 
         /// <summary>
@@ -113,7 +104,8 @@ namespace gs.RolePermission.DAL
         {
             //所有字段均修改
             dmc.Entry<T>(entity).State = System.Data.Entity.EntityState.Modified;
-            return dmc.SaveChanges() > 0;
+            //return dmc.SaveChanges() > 0;
+            return true;
         }
 
 
@@ -125,7 +117,8 @@ namespace gs.RolePermission.DAL
         public bool Delete(T entity)
         {
             dmc.Entry<T>(entity).State = System.Data.Entity.EntityState.Deleted;
-            return dmc.SaveChanges() > 0;
+            //return dmc.SaveChanges() > 0;
+            return true;
         }
     }
 }

@@ -13,17 +13,25 @@ namespace gs.RolePermission.BLL
 {
     class UserInfoBll
     {
+        //111
+        IDbSession dbSession =DbSessionFactory.GetCurrentDbSsession(); 
         //IUserInfoDal userInfoDal = new UserInfoDal();
         //IUserInfoDal userInfoDal = new NHUserInfoDal();
         IUserInfoDal userInfoDal = StaticDalFactory.GetUserInfoDal();
-        public int Add(UserInfo userInfo)
+        public UserInfo Add(UserInfo userInfo)
         {
-            return userInfoDal.Add(userInfo);
+            //return userInfoDal.Add(userInfo);
+            dbSession.UserInfoDal.Add(userInfo);
+            dbSession.SaveChanges();
+            return userInfo;
         }
 
         public bool Delete(UserInfo userInfo)
         {
-            return userInfoDal.Delete(userInfo);
+            //return userInfoDal.Delete(userInfo);
+            dbSession.UserInfoDal.Delete(userInfo);
+            dbSession.SaveChanges();
+            return true;
         }
     }
 }
