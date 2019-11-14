@@ -20,8 +20,8 @@ namespace gs.RolePermission.DAL.Tests
             user.Uname = "曹操1103";
             user.Pwd = "123456";
             user.ShowName = "曹阿瞒";
-            int sum = dal.Add(user);
-            Assert.AreEqual(1, sum);
+            bool sum = dal.Add(user);
+            Assert.AreEqual(true, sum);
         }
 
         [TestMethod()]

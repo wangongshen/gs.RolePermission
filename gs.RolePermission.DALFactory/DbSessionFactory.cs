@@ -10,7 +10,7 @@ namespace gs.RolePermission.DALFactory
 {
     public static class DbSessionFactory
     {
-        public static IDbSession GetCurrentDbSsession()
+        public static IDbSession GetCurrentDbSession()
         {
             IDbSession dbSession = CallContext.GetData("DbSession") as IDbSession;
             if (dbSession == null)

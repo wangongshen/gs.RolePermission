@@ -64,5 +64,8 @@ namespace gs.RolePermission.IDAL
         /// <param name="T"></param>
         /// <returns></returns>
         bool Delete(T entity);
+
+        bool Detete(int id);
+        int DeleteListByLogical(List<int> ids);
     }
 }

@@ -22,6 +22,16 @@ namespace gs.RolePermission.NHDAL
             throw new NotImplementedException();
         }
 
+        public int DeleteListByLogical(List<int> ids)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Detete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<UserInfo> GetAllEntities()
         {
             throw new NotImplementedException();
@@ -38,6 +48,11 @@ namespace gs.RolePermission.NHDAL
         }
 
         public UserInfo GetTById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int ModifyPwd(int id, string newPwd)
         {
             throw new NotImplementedException();
         }

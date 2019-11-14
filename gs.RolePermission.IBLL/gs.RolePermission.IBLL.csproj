@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{89183DA7-EE40-4258-9D02-FB181FDD4DA1}</ProjectGuid>
+    <ProjectGuid>{A0B582AE-2275-4B5A-ACFA-5F2648A23EA6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>gs.RolePermission.BLL</RootNamespace>
-    <AssemblyName>gs.RolePermission.BLL</AssemblyName>
+    <RootNamespace>gs.RolePermission.IBLL</RootNamespace>
+    <AssemblyName>gs.RolePermission.IBLL</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,31 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseBll.cs" />
+    <Compile Include="IOrderInfoBll.cs" />
+    <Compile Include="IUserInfoBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserInfoBll.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\gs.RolePermission.DALFactory\gs.RolePermission.DALFactory.csproj">
-      <Project>{EEC0716B-1464-4133-99E8-F0E7C0959387}</Project>
-      <Name>gs.RolePermission.DALFactory</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\gs.RolePermission.DAL\gs.RolePermission.DAL.csproj">
-      <Project>{8CE4D058-3742-4EC4-AF44-4ABE55D66026}</Project>
-      <Name>gs.RolePermission.DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\gs.RolePermission.IDAL\gs.RolePermission.IDAL.csproj">
-      <Project>{E3D40985-D9B2-48FC-B9D5-95CF548DD093}</Project>
-      <Name>gs.RolePermission.IDAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\gs.RolePermission.Model\gs.RolePermission.Model.csproj">
-      <Project>{44D9891F-C26F-4200-A558-CBD203B0B235}</Project>
-      <Name>gs.RolePermission.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\gs.RolePermission.NHDAL\gs.RolePermission.NHDAL.csproj">
-      <Project>{1EC5E11A-5358-445F-AB3A-D61AF2E08296}</Project>
-      <Name>gs.RolePermission.NHDAL</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

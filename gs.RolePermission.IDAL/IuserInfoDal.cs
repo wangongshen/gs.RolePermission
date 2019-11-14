@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace gs.RolePermission.IDAL
 {
-    public interface IUserInfoDal:IBaseDal<UserInfo>
+    public partial interface IUserInfoDal:IBaseDal<UserInfo>
     {
+        int ModifyPwd(int id, string newPwd);
     }
 }

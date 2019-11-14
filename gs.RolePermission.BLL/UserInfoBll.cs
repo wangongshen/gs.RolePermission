@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace gs.RolePermission.BLL
 {
-    class UserInfoBll
+    public class UserInfoBll : BaseBll<UserInfo>, IUserInfoBll
     {
-        //111
+        //1112
         IDbSession dbSession =DbSessionFactory.GetCurrentDbSsession(); 
         //IUserInfoDal userInfoDal = new UserInfoDal();
         //IUserInfoDal userInfoDal = new NHUserInfoDal();
@@ -32,6 +32,11 @@ namespace gs.RolePermission.BLL
             dbSession.UserInfoDal.Delete(userInfo);
             dbSession.SaveChanges();
             return true;
+        }
+
+        public override void SetCurrentDal()
+        {
+            throw new NotImplementedException();
         }
     }
 }

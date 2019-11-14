@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace gs.RolePermission.DAL
 {
-    public class UserInfoDal:BaseDal<UserInfo>,IUserInfoDal
+    public partial class UserInfoDal : BaseDal<UserInfo>, IUserInfoDal
     {
+        #region MyRegion
         //DataModelContainer dmc = new DataModelContainer();
         ///// <summary>
         ///// 根据Id查询用户
@@ -91,7 +92,7 @@ namespace gs.RolePermission.DAL
         //        return 0;
         //        throw;
         //    }
-           
+
         //}
 
         ///// <summary>
@@ -105,7 +106,7 @@ namespace gs.RolePermission.DAL
         //    dmc.Entry<UserInfo>(userInfo).State = System.Data.Entity.EntityState.Modified;
         //    return dmc.SaveChanges() > 0;
         //}
-        
+
 
         ///// <summary>
         /////删除 
@@ -116,6 +117,54 @@ namespace gs.RolePermission.DAL
         //{
         //    dmc.Entry<UserInfo>(userInfo).State = System.Data.Entity.EntityState.Deleted;
         //    return dmc.SaveChanges() > 0;
-        //}
+        //} 
+        #endregion
+
+        //DataModelContainer db = new DataModelContainer();
+        //在继承关系中当子类对象赋值给父类变量的情况下，父类变量也可以通过强制转换指向子类变量。DbContentFactory.GetCurrentDbContent()返回值为DbContext，即是DataModelContainer父类。而DataModelContainer继承于DbContext
+        DataModelContainer db = DbContentFactory.GetCurrentDbContent() as DataModelContainer;
+
+        public int DeleteListByLogical(List<int> ids)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Detete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int ModifyPwd(int id, string newPwd)
+        {
+            #region 方法1            
+            //UserInfo user = db.UserInfo.Where(u => u.Id == id).FirstOrDefault();
+            //user.Pwd = newPwd;
+            //return db.SaveChanges();
+            #endregion
+
+            #region 方法2            
+            //UserInfo user = new UserInfo();
+            //user.Id = id;
+            //user.Pwd = newPwd;
+            //db.UserInfo.Attach(user); //相当于下面一句
+            //db.Entry<UserInfo>(user).Property<string>(u => u.Pwd).IsModified = true;
+            //db.Configuration.ValidateOnSaveEnabled = false;//关闭自动验证实体
+            //return db.SaveChanges();
+            #endregion
+            #region 方法3            
+            UserInfo user = db.UserInfo.Find(id);
+            //user.Id = id;
+            user.Pwd = newPwd;
+            db.UserInfo.Attach(user); //相当于下面一句
+            db.Entry<UserInfo>(user).Property<string>(u => u.Pwd).IsModified = true;
+            db.Configuration.ValidateOnSaveEnabled = false;//关闭自动验证实体
+            return db.SaveChanges();
+            #endregion
+        }
+
+        int IBaseDal<UserInfo>.Add(UserInfo entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
