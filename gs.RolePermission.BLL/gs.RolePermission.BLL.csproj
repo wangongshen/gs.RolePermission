@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseBll.cs" />
+    <Compile Include="OrderInfoBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserInfoBll.cs" />
   </ItemGroup>
@@ -53,6 +54,10 @@
     <ProjectReference Include="..\gs.RolePermission.DAL\gs.RolePermission.DAL.csproj">
       <Project>{8CE4D058-3742-4EC4-AF44-4ABE55D66026}</Project>
       <Name>gs.RolePermission.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gs.RolePermission.IBLL\gs.RolePermission.IBLL.csproj">
+      <Project>{A0B582AE-2275-4B5A-ACFA-5F2648A23EA6}</Project>
+      <Name>gs.RolePermission.IBLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\gs.RolePermission.IDAL\gs.RolePermission.IDAL.csproj">
       <Project>{E3D40985-D9B2-48FC-B9D5-95CF548DD093}</Project>

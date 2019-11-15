@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace gs.RolePermission.DALFactory
 {
-    public class DbSession:IDbSession
+    public class DbSession : IDbSession
     {
         public IUserInfoDal UserInfoDal
         {
