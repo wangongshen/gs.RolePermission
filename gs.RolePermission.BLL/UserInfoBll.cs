@@ -10,7 +10,7 @@ namespace gs.RolePermission.BLL
     {
         public override void SetCurrentDal()
         {
-            throw new NotImplementedException();
+            CurrentDal = DbSession.UserInfoDal;
         }
     }
 }

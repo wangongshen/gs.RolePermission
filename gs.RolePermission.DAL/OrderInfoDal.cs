@@ -10,19 +10,6 @@ namespace gs.RolePermission.DAL
 {
     public partial class OrderInfoDal : BaseDal<OrderInfo>, IOrderInfoDal
     {
-        public int DeleteListByLogical(List<int> ids)
-        {
-            throw new NotImplementedException();
-        }
 
-        public bool Detete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        int IBaseDal<OrderInfo>.Add(OrderInfo entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

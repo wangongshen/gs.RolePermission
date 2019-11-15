@@ -1,0 +1,50 @@
+﻿@model gs.RolePermission.Model.UserInfo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>用户详情</title>
+</head>
+<body>
+    <div>
+        <h4>用户详情</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                姓名：
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Uname)
+            </dd>
+    
+            <dt>
+                密码：
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Pwd)
+            </dd>
+    
+            <dt>
+                昵称：
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ShowName)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("修改", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("返回主页", "Index")
+    </p>
+</body>
+</html>

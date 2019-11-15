@@ -10,11 +10,6 @@ namespace gs.RolePermission.IDAL
     public interface IBaseDal<T> where T:class,new ()
     {
 
-        /// <summary>
-        /// 根据Id查询用户
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         T GetTById(int id);
 
         /// <summary>
@@ -28,7 +23,7 @@ namespace gs.RolePermission.IDAL
         /// </summary>
         /// <param name="whereLambda"></param>
         /// <returns></returns>
-        IQueryable<T> GetEntities(Expression<Func<T, bool>> whereLambda);
+       IQueryable<T> GetEntities(Expression<Func<T, bool>> whereLambda);
 
         /// <summary>
         /// 分页查询
@@ -42,14 +37,12 @@ namespace gs.RolePermission.IDAL
         /// <param name="isAsc"></param>
         /// <returns></returns>
         IQueryable<T> GetPageEntities<S>(int pageSize, int pageIndex, out int total, Expression<Func<T, bool>> whereLambda, Expression<Func<T, S>> orderByLambda, bool isAsc);
-
         /// <summary>
         /// 增
         /// </summary>
         /// <param name="T"></param>
         /// <returns></returns>
-        int Add(T entity);
-
+        bool Add(T entity);
 
         /// <summary>
         ///修改
@@ -58,6 +51,7 @@ namespace gs.RolePermission.IDAL
         /// <returns></returns>
         bool Update(T entity);
 
+
         /// <summary>
         ///删除 
         /// </summary>
@@ -65,7 +59,10 @@ namespace gs.RolePermission.IDAL
         /// <returns></returns>
         bool Delete(T entity);
 
+        bool Delete(int id);
+
         bool Detete(int id);
         int DeleteListByLogical(List<int> ids);
+
     }
 }

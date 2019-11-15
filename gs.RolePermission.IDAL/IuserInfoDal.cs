@@ -9,6 +9,6 @@ namespace gs.RolePermission.IDAL
 {
     public partial interface IUserInfoDal:IBaseDal<UserInfo>
     {
-        int ModifyPwd(int id, string newPwd);
+        
     }
 }

@@ -24,7 +24,16 @@ namespace gs.RolePermission.DALFactory
         /// <returns></returns>
         public int SaveChanges()
         {
-            return DbContentFactory.GetCurrentDbContent().SaveChanges();//需要添加对Entity Framework.dll的引用
+            try
+            {
+                return DbContentFactory.GetCurrentDbContent().SaveChanges();//需要添加对Entity Framework.dll的引用
+            }
+            catch (Exception)
+            {
+
+                return 1;
+            }
+           
         }
     }
 }

@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.vb" Inherits="gs.RolePermission.UI.Portal.MvcApplication" Language="VB" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="gs.RolePermission.UI.Portal.MvcApplication" Language="C#" %>

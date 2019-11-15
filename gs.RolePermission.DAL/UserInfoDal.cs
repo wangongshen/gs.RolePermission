@@ -124,16 +124,6 @@ namespace gs.RolePermission.DAL
         //在继承关系中当子类对象赋值给父类变量的情况下，父类变量也可以通过强制转换指向子类变量。DbContentFactory.GetCurrentDbContent()返回值为DbContext，即是DataModelContainer父类。而DataModelContainer继承于DbContext
         DataModelContainer db = DbContentFactory.GetCurrentDbContent() as DataModelContainer;
 
-        public int DeleteListByLogical(List<int> ids)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Detete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public int ModifyPwd(int id, string newPwd)
         {
             #region 方法1            
@@ -162,9 +152,6 @@ namespace gs.RolePermission.DAL
             #endregion
         }
 
-        int IBaseDal<UserInfo>.Add(UserInfo entity)
-        {
-            throw new NotImplementedException();
-        }
+ 
     }
 }

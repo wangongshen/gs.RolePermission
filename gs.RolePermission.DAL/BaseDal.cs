@@ -120,5 +120,30 @@ namespace gs.RolePermission.DAL
             //return dmc.SaveChanges() > 0;
             return true;
         }
+
+        public bool Delete(int id)
+        {
+            dmc.Entry(id).State = System.Data.Entity.EntityState.Deleted;
+            //return dmc.SaveChanges() > 0;
+            return true;
+        }
+
+        public bool Detete(int id)
+        {
+            var entity = dmc.Set<T>().Find(id);//根据id找到实体
+            dmc.Set<T>().Remove(entity);//由于这里先Find找到了实体，所以这里可以用Remove标记该实体要移除（删除）。如果不是先Find到实体就需要用System.Data.Entity.EntityState.Deleted
+            return true;
+        }
+        public int DeleteListByLogical(List<int> ids)
+        {
+            //foreach (var id in ids)
+            //{
+            //    var entity = dmc.Set<T>().Find(id);
+
+            //    dmc.Entry(entity).Property("DelFlag").CurrentValue = (short)gs.RolePermission.Model.Enum.DelFlagEnum.Deleted;
+            //    dmc.Entry(entity).Property("DelFlag").IsModified = true;//把DelFlag列标记为修改状态，而且这样写死了就要求所有实体都应该有DelFlag属性
+            //}
+            return 1;
+        }
     }
 }
