@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+  <!--为控制器注入属性-->
+  <object type="gs.RolePermission.UI.Portal.Controllers.UserInfoController, gs.RolePermission.UI.Portal" singleton="false" >
+     <property name="UserInfoBll" ref="UserInfoBll" />
+  </object>
+ <object type="gs.RolePermission.UI.Portal.Controllers.OrderInfoController, gs.RolePermission.UI.Portal" singleton="false" >
+     <property name="OrderInfoBll" ref="OrderInfoBll" />
+  </object>
+ </objects>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SpringNetDemo
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -19,12 +19,18 @@ namespace SpringNetDemo
             //Console.ReadKey();  
             #endregion
 
-            //Spring.Net
+            #region Spring.Net 1
+            ////Spring.Net 1
             IApplicationContext ctx = ContextRegistry.GetContext();
             IUserInfo dal = ctx.GetObject("UserInfo") as IUserInfo;
             dal.Show();
-           
             Console.ReadKey();
+            #endregion
+
+            //IUserInfo userInfo = new UserInfo("1",1);
+            //userInfo.Show();
+
+            //Console.ReadKey();
         }
     }
 }

@@ -11,7 +11,8 @@ namespace gs.RolePermission.UI.Portal.Controllers
 {
     public class UserInfoController : Controller
     {
-        IUserInfoBll userInfoBll = new UserInfoBll();
+        //IUserInfoBll userInfoBll = new UserInfoBll();
+        public IUserInfoBll userInfoBll { get; set; }
         // GET: UserInfo
         public ActionResult Index()
         {

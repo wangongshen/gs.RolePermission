@@ -9,15 +9,16 @@ namespace SpringNetDemo
     class UserInfo : IUserInfo
     {
         public string Name { get; set; }
-        string Age;
-        string sex;
-        int num;
+        public string Age { get; set; }
+        public string sex { get; set; }
+        public int num { get; set; }
 
-        public UserInfo(string Sex,int Num) {
+        public UserInfo(string Sex, int Num)
+        {
             sex = Sex;
             num = Num;
         }
-        
+
         public UserInfoDal userInfoDal { get; set; }
         public void Show()
         {
