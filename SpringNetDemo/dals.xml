@@ -4,5 +4,15 @@
 	xsi:schemaLocation="http://www.springframework.net
 		http://www.springframework.net/xsd/spring-objects.xsd">
 
-  <object name="UserInfo" type="SpringNetDemo.UserInfoDal,SpringNetDemo"></object>
+  <object name="UserInfoDal" type="SpringNetDemo.UserInfoDal,SpringNetDemo">
+    
+  </object>
+  <object name="UserInfo" type="SpringNetDemo.UserInfo,SpringNetDemo">
+    <constructor-arg index="0" value="男"/>
+    <constructor-arg index="1" value="123"/>
+    <property name="Name" value="曹操" ></property>
+    <property name="Age" value="987" ></property>
+    <property name="UserInfoDal" ref="UserInfoDal" ></property>
+   
+  </object>
 </objects>

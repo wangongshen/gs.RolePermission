@@ -23,6 +23,7 @@ namespace SpringNetDemo
             IApplicationContext ctx = ContextRegistry.GetContext();
             IUserInfo dal = ctx.GetObject("UserInfo") as IUserInfo;
             dal.Show();
+           
             Console.ReadKey();
         }
     }

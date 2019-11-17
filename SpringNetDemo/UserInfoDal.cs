@@ -12,5 +12,10 @@ namespace SpringNetDemo
         {
             Console.WriteLine("Spring.Net666");
         }
+
+        public void ShowDal()
+        {
+            Console.WriteLine("Spring.Net-ShowDal");
+        }
     }
 }
