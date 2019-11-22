@@ -158,6 +158,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MyActionFilterAttribute.cs" />
+    <Compile Include="Models\MyExceptionFilterAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -207,7 +209,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -226,6 +227,10 @@
     <ProjectReference Include="..\gs.RolePermission.BLL\gs.RolePermission.BLL.csproj">
       <Project>{89183DA7-EE40-4258-9D02-FB181FDD4DA1}</Project>
       <Name>gs.RolePermission.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gs.RolePermission.Common\gs.RolePermission.Common.csproj">
+      <Project>{eb3bf46c-b6ae-4049-b762-dd625a79ed91}</Project>
+      <Name>gs.RolePermission.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\gs.RolePermission.DALFactory\gs.RolePermission.DALFactory.csproj">
       <Project>{eec0716b-1464-4133-99e8-f0e7c0959387}</Project>

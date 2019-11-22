@@ -1,6 +1,7 @@
 ﻿using gs.RolePermission.BLL;
 using gs.RolePermission.IBLL;
 using gs.RolePermission.Model;
+using gs.RolePermission.UI.Portal.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace gs.RolePermission.UI.Portal.Controllers
 {
+    [MyActionFilterAttribute(Name ="写在类上的过滤器")]
     public class UserInfoController : Controller
     {
         //IUserInfoBll userInfoBll = new UserInfoBll();

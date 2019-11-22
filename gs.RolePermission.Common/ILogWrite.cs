@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace gs.RolePermission.Common
 {
-    public class Class1
+    public interface ILogWrite
     {
+        void WriteLogInfo(string txt); 
     }
 }
