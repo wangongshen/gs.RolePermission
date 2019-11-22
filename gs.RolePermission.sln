@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gs.RolePermission.UI.Portal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpringNetDemo", "SpringNetDemo\SpringNetDemo.csproj", "{2E134B2B-25E4-479B-B339-72065EB96B9A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCFilterDemo", "MVCFilterDemo\MVCFilterDemo.csproj", "{8C8135E9-23E0-4232-A9F6-E36605496F94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +103,10 @@ Global
 		{2E134B2B-25E4-479B-B339-72065EB96B9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E134B2B-25E4-479B-B339-72065EB96B9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E134B2B-25E4-479B-B339-72065EB96B9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C8135E9-23E0-4232-A9F6-E36605496F94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C8135E9-23E0-4232-A9F6-E36605496F94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C8135E9-23E0-4232-A9F6-E36605496F94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C8135E9-23E0-4232-A9F6-E36605496F94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,6 +125,7 @@ Global
 		{A0B582AE-2275-4B5A-ACFA-5F2648A23EA6} = {2FFAC8B4-D7B3-478E-AD0E-0F6F4D52DF2B}
 		{61922043-96D8-4A19-9BA7-9EAC5DFEC869} = {C3BEBBFE-CFD0-4BE0-AF92-7B90A6D094EB}
 		{2E134B2B-25E4-479B-B339-72065EB96B9A} = {A5E4D79D-0C05-4B95-A0BE-268B89B37001}
+		{8C8135E9-23E0-4232-A9F6-E36605496F94} = {A5E4D79D-0C05-4B95-A0BE-268B89B37001}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9A783FE9-33FA-4680-A9F6-5E493DAFEA7D}
