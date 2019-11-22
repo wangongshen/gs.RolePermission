@@ -16,6 +16,8 @@ namespace gs.RolePermission.UI.Portal
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //≥ı ºªØlog4
+            log4net.Config.XmlConfigurator.Configure();
         }
     }
 }
