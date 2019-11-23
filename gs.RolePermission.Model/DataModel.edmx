@@ -21,6 +21,7 @@
     <Property Name="Uname" Type="nvarchar" Nullable="true" MaxLength="32" />
     <Property Name="Pwd" Type="nvarchar" Nullable="true" MaxLength="32" />
     <Property Name="ShowName" Type="nvarchar" Nullable="true" MaxLength="64" />
+    <Property Name="DelFlag" Type="smallint" Nullable="false" DefaultValue="0" />
   </EntityType>
   <EntityType Name="OrderInfo">
     <Key>
@@ -63,6 +64,7 @@
           <Property Name="Pwd" Type="String" Nullable="true" MaxLength="32" />
           <Property Name="ShowName" Type="String" Nullable="true" MaxLength="64" />
           <NavigationProperty Name="OrderInfo" Relationship="DataModel.UserInfoOrderInfo" FromRole="UserInfo" ToRole="OrderInfo" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" DefaultValue="0" />
         </EntityType>
         <EntityType Name="OrderInfo">
           <Key>
@@ -98,6 +100,7 @@
           <ScalarProperty Name="Uname" ColumnName="Uname" />
           <ScalarProperty Name="Pwd" ColumnName="Pwd" />
           <ScalarProperty Name="ShowName" ColumnName="ShowName" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

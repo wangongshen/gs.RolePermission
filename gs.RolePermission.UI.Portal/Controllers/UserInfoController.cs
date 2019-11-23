@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace gs.RolePermission.UI.Portal.Controllers
 {
-    [MyActionFilterAttribute(Name ="写在类上的过滤器")]
+    //[MyActionFilterAttribute(Name ="写在类上的过滤器")]
     public class UserInfoController : Controller
     {
         //IUserInfoBll userInfoBll = new UserInfoBll();

@@ -9,8 +9,10 @@ namespace gs.RolePermission.UI.Portal
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             //filters.Add(new HandleErrorAttribute());
-            filters.Add(new MyActionFilterAttribute() { Name = "全局的" });
+
+            //filters.Add(new MyActionFilterAttribute() { Name = "全局的" });
             filters.Add(new MyExceptionFilterAttribute());
+            filters.Add(new LoginCheckFilterAttribute() { IsCheck = true });
         }
     }
 }

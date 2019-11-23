@@ -7,4 +7,7 @@
  <object type="gs.RolePermission.UI.Portal.Controllers.OrderInfoController, gs.RolePermission.UI.Portal" singleton="false" >
      <property name="OrderInfoBll" ref="OrderInfoBll" />
   </object>
+  <object type="gs.RolePermission.UI.Portal.Controllers.UserLoginController, gs.RolePermission.UI.Portal" singleton="false" >
+    <property name="UserInfoBll" ref="UserInfoBll" />
+  </object>
  </objects>

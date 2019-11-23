@@ -17,6 +17,7 @@ namespace gs.RolePermission.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UserInfo()
         {
+            this.DelFlag = 0;
             this.OrderInfo = new HashSet<OrderInfo>();
         }
     
@@ -24,6 +25,7 @@ namespace gs.RolePermission.Model
         public string Uname { get; set; }
         public string Pwd { get; set; }
         public string ShowName { get; set; }
+        public short DelFlag { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderInfo> OrderInfo { get; set; }
