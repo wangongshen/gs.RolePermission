@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace gs.RolePermission.UI.Portal.Controllers
 {
-    public class OrderInfoController : Controller
+    public class OrderInfoController : BaseController
     {
         public IOrderInfoBll OrderInfoBll { get; set; }
         // GET: OrderInfo

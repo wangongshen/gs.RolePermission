@@ -11,8 +11,9 @@ using System.Web.Mvc;
 namespace gs.RolePermission.UI.Portal.Controllers
 {
     //[MyActionFilterAttribute(Name ="写在类上的过滤器")]
-    public class UserInfoController : Controller
+    public class UserInfoController : BaseController
     {
+   
         //IUserInfoBll userInfoBll = new UserInfoBll();
         public IUserInfoBll userInfoBll { get; set; }
         // GET: UserInfo

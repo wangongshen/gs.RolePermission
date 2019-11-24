@@ -12,7 +12,8 @@ namespace gs.RolePermission.UI.Portal
 
             //filters.Add(new MyActionFilterAttribute() { Name = "全局的" });
             filters.Add(new MyExceptionFilterAttribute());
-            filters.Add(new LoginCheckFilterAttribute() { IsCheck = true });
+            //由基类控制器实现用户是否登录校验，下面就注释掉
+            //filters.Add(new LoginCheckFilterAttribute() { IsCheck = true });
         }
     }
 }
