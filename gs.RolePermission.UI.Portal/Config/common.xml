@@ -4,9 +4,11 @@
   <object name="MemcacheWriter" type="gs.RolePermission.Common.Cache.MemcacheWriter, gs.RolePermission.Common" singleton="false" >
 
   </object>
+  <object name="RedisCacheWriter" type="gs.RolePermission.Common.Cache.RedisCacheWriter, gs.RolePermission.Common" singleton="false" >
 
+  </object>
   <object name="CacheHelper" type="gs.RolePermission.Common.Cache.CacheHelper, gs.RolePermission.Common" singleton="false" >
-    <property name="CacheWriter" ref="MemcacheWriter" />
+    <property name="CacheWriter" ref="RedisCacheWriter" />
   </object>
   
  </objects>

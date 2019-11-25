@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EB3BF46C-B6AE-4049-B762-DD625A79ED91}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>gs.RolePermission.Common</RootNamespace>
-    <AssemblyName>gs.RolePermission.Common</AssemblyName>
+    <ProjectGuid>{3AA33860-6ED2-42B6-9763-C0B1D6255CCA}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>RedisDemo</RootNamespace>
+    <AssemblyName>RedisDemo</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,19 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Commons">
-      <HintPath>..\packages\Memcached\Commons.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\packages\Memcached\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Memcached\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Memcached.ClientLibrary">
-      <HintPath>..\packages\Memcached\Memcached.ClientLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="ServiceStack">
       <HintPath>..\packages\Redis\ServiceStack.dll</HintPath>
     </Reference>
@@ -53,15 +42,8 @@
     <Reference Include="ServiceStack.ServiceInterface">
       <HintPath>..\packages\Redis\ServiceStack.ServiceInterface.dll</HintPath>
     </Reference>
-    <Reference Include="Spring.Core">
-      <HintPath>..\packages\Spring.Core.2.0.1\lib\net45\Spring.Core.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -70,19 +52,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cache\CacheHelper.cs" />
-    <Compile Include="Cache\HttpRuntimeCacheWriter.cs" />
-    <Compile Include="Cache\ICacheWriter.cs" />
-    <Compile Include="Cache\MemcacheWriter.cs" />
-    <Compile Include="Cache\RedisCacheWriter.cs" />
-    <Compile Include="ILogWrite.cs" />
-    <Compile Include="Log4NetWriter.cs" />
-    <Compile Include="LogHelper.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlServerWriter.cs" />
-    <Compile Include="TextFileWriter.cs" />
-    <Compile Include="Utility.cs" />
-    <Compile Include="ValidateCode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

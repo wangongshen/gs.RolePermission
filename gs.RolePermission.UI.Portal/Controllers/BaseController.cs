@@ -1,4 +1,5 @@
-﻿using gs.RolePermission.Common.Cache;
+﻿using gs.RolePermission.Common;
+using gs.RolePermission.Common.Cache;
 using gs.RolePermission.Model;
 using System;
 using System.Collections.Generic;
@@ -31,14 +32,15 @@ namespace gs.RolePermission.UI.Portal.Controllers
                 //}
 
                 //下面不再从Session中读取用户信息，而改为从缓存里拿到当前登录用户信息
-                if (Request.Cookies["userLoginId"] == null)//表示用户没有登录
+                var userCookies = Request.Cookies["userLoginId"];
+                if (userCookies == null)//表示用户没有登录
                 {
                     filterContext.HttpContext.Response.Redirect("/UserLogin/Index");
                     return;
                 }
                 string userGuid = Request.Cookies["userLoginId"].Value;//拿到用户的标志位
                                                                        //然后根据标志位userGuid到缓存里拿到用户信息
-                UserInfo userInfo = CacheHelper.GetCache(userGuid) as UserInfo;
+                UserInfo userInfo = CacheHelper.GetCache<UserInfo>(userGuid);//object转实体类
                 if (userInfo == null)
                 {//缓存信息过期了。长时间不操作，超时了
                     filterContext.HttpContext.Response.Redirect("/UserLogin/Index");
@@ -46,7 +48,7 @@ namespace gs.RolePermission.UI.Portal.Controllers
                 }
                 LoginUser = userInfo;
                 //下面还要把缓存超时时间又重新设置（20分钟）
-                CacheHelper.SetCache(userGuid, userInfo, DateTime.Now.AddMinutes(20));//这个实现就是先清掉缓存，然后重新加一个
+                CacheHelper.SetCache(userGuid, userInfo, DateTime.Now.AddMinutes(1));//这个实现就是先清掉缓存，然后重新加一个
             }
         }
     }

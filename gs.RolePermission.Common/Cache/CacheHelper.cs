@@ -16,7 +16,7 @@ namespace gs.RolePermission.Common.Cache
             //走一个容器来创建一个CacheWriter实例、初始化Spring.net
             IApplicationContext ctx = ContextRegistry.GetContext();
             //ctx.GetObject("CacheWriter");
-            CacheHelper.CacheWriter = ctx.GetObject("MemcacheWriter") as ICacheWriter;
+            CacheHelper.CacheWriter = ctx.GetObject("RedisCacheWriter") as ICacheWriter;
         }
         public static void AddCache(string key, object value, DateTime expDate)
         {
@@ -38,7 +38,10 @@ namespace gs.RolePermission.Common.Cache
         {
             return CacheWriter.GetCache(key);
         }
-
+        public static T GetCache<T>(string key)
+        {
+            return CacheWriter.GetCache<T>(key);
+        }
         public static void SetCache(string key, object value, DateTime expDate)
         {
             CacheWriter.SetCache(key, value, expDate);
