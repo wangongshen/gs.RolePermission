@@ -158,6 +158,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ActionInfoController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderInfoController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Controllers\UserLoginController.cs" />
@@ -183,15 +184,20 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\Home\3DSMAX.png" />
+    <Content Include="Content\Images\Home\applebg.jpg" />
+    <Content Include="Content\Images\Home\bg.jpg" />
     <Content Include="Content\Images\login\HeadBack.jpg" />
     <Content Include="Content\Images\login\login-btn.gif" />
     <Content Include="Content\Images\login\panel-c.gif" />
     <Content Include="Content\Images\login\panel-f.gif" />
     <Content Include="Content\Images\login\panel-h.gif" />
+    <Content Include="Content\ligerui-all.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\base.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -206,6 +212,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\ligerDialog.js" />
+    <Content Include="Scripts\ligerDrag.js" />
+    <Content Include="Scripts\ligerResizable.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -224,6 +233,7 @@
     <Content Include="Views\UserInfo\Details.cshtml" />
     <Content Include="Views\OrderInfo\Index.cshtml" />
     <Content Include="Views\UserLogin\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
