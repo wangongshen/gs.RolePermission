@@ -9,7 +9,8 @@ namespace gs.RolePermission.Common.Cache
 {
     public class RedisCacheWriter : ICacheWriter
     {
-        static RedisClient redisClient = new RedisClient("m.xmbygy.com", 6380);//redis服务IP和端口
+        //redis服务IP和端口
+        static RedisClient redisClient = new RedisClient("m.xmbygy.com", 6380);
         //private RedisClient redisClient;
         //public RedisCacheWriter()
         //{

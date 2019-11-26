@@ -187,6 +187,9 @@
     <Content Include="Content\Images\Home\3DSMAX.png" />
     <Content Include="Content\Images\Home\applebg.jpg" />
     <Content Include="Content\Images\Home\bg.jpg" />
+    <Content Include="Content\Images\Home\bgright.png" />
+    <Content Include="Content\Images\Home\logo.jpg" />
+    <Content Include="Content\Images\login\bgtop.png" />
     <Content Include="Content\Images\login\HeadBack.jpg" />
     <Content Include="Content\Images\login\login-btn.gif" />
     <Content Include="Content\Images\login\panel-c.gif" />
@@ -214,6 +217,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\ligerDialog.js" />
     <Content Include="Scripts\ligerDrag.js" />
+    <Content Include="Scripts\ligerLayout.js" />
     <Content Include="Scripts\ligerResizable.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />

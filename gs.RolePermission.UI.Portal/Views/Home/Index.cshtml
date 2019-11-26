@@ -7,6 +7,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
+    <script src="~/Scripts/ligerLayout.js"></script>
     <link href="~/Content/ligerui-all.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/base.js"></script>
@@ -103,18 +104,18 @@
         }
     </style>
 </head>
-<body style="overflow: hidden; background: url(../Content/Images/Home/bg.jpg) no-repeat  center center;">
+<body>
     <div id="layout1">
-        <div position="center" title="标题">
+        <div position="top" style="background: url(../Content/Images/login/bgtop.png) repeat-x; height:80px;">
+            <img src="../Content/Images/Home/logo.jpg" style="float:left" />
+            <h1 style="float:left;padding-top:40px; padding-left:20px;">企业级系统架构设计实战精讲</h1>
+            <img src="~/Content/Images/Home/bgright.png" style="float:right;padding-right:20px;" />
+        </div>
+        <div position="center" title="标题" style="overflow: hidden; background: url(../Content/Images/Home/bg.jpg) no-repeat  center center;">
             <div id="winlinks">
                 <ul></ul>
             </div>
         </div>
-        <div position="top"></div>
-    </div>
-    <div id="winlinks">
-        <ul>
-        </ul>
     </div>
 </body>
 </html>
