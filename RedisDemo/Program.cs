@@ -11,13 +11,13 @@ namespace RedisDemo
     {
         static void Main(string[] args)
         {
-            var client = new RedisClient("127.0.0.1", 6380);//这两个参数的值要事先在配置文件Redis.conf里有配置的,两个参数分别为host、port
-                                                            //安装Redis服务后，最好不要让其在外网环境下面裸奔，可以为其设置一个复杂的访问密码，这样可以防止暴力破解
-                                                            //配置文件中设置了访问密码，即加入了requirepass 123456789xdz，123456789xdz表示密码，则需要下面语句。
-            //client.Password = "123456789xdz";
-            //Redis最基本功能——分布式缓存
+            var client = new RedisClient("m.xmbygy.com", 6380);//这两个参数的值要事先在配置文件Redis.conf里有配置的,两个参数分别为host、port
+                                                                 //安装Redis服务后，最好不要让其在外网环境下面裸奔，可以为其设置一个复杂的访问密码，这样可以防止暴力破解
+                                                                 //配置文件中设置了访问密码，即加入了requirepass 123456789xdz，123456789xdz表示密码，则需要下面语句。
+                                                                 //client.Password = "123456789xdz"; 
+                                                                 //Redis最基本功能——分布式缓存
             #region 常用数据类型：string
-            //client.Set<string>("name", "xdz");
+            //client.Set<string>("key13", "xdz123");
             //string name = client.Get<string>("name");
             //Console.WriteLine(name);
             #endregion
@@ -87,7 +87,7 @@ namespace RedisDemo
             //    Console.WriteLine(client.PopItemFromList("jinzhan"));
             //}
             #endregion
-            string name = client.Get<string>("key12");
+            string name = client.Get<string>("key13");
             Console.WriteLine(name);
             Console.ReadKey();
         }
