@@ -20,6 +20,7 @@ namespace gs.RolePermission.Model
         {
             this.DelFlag = 0;
             this.OrderInfo = new HashSet<OrderInfo>();
+            this.RoleInfo = new HashSet<RoleInfo>();
         }
     
         public int Id { get; set; }
@@ -27,8 +28,13 @@ namespace gs.RolePermission.Model
         public string Pwd { get; set; }
         public string ShowName { get; set; }
         public short DelFlag { get; set; }
+        public string Remark { get; set; }
+        public string ModifyOn { get; set; }
+        public string SubTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderInfo> OrderInfo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RoleInfo> RoleInfo { get; set; }
     }
 }

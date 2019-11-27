@@ -31,12 +31,7 @@
             padding: 0;
         }
 
-        #winlinks {
-            position: absolute;
-            left: 20px;
-            top: 20px;
-            width: 100%;
-        }
+       
 
             #winlinks ul {
                 position: relative;
@@ -102,16 +97,32 @@
             width: 22px;
             height: 22px;
         }
+        .top {
+            background: url(../Content/Images/login/bgtop.png) repeat-x; 
+            background-color:blue;
+            height:80px;
+        }
+        .center {
+            overflow: hidden; 
+            background: url(../Content/Images/Home/bg.jpg) no-repeat  center center;
+        }
+         #winlinks {
+            position: absolute;
+            left: 0px;
+            top: 80px;
+            width: 100%;
+            /*background-color:aquamarine;*/
+        }
     </style>
 </head>
 <body>
     <div id="layout1">
-        <div position="top" style="background: url(../Content/Images/login/bgtop.png) repeat-x; height:80px;">
+        <div position="top" class="top">
             <img src="../Content/Images/Home/logo.jpg" style="float:left" />
             <h1 style="float:left;padding-top:40px; padding-left:20px;">企业级系统架构设计实战精讲</h1>
             <img src="~/Content/Images/Home/bgright.png" style="float:right;padding-right:20px;" />
         </div>
-        <div position="center" title="标题" style="overflow: hidden; background: url(../Content/Images/Home/bg.jpg) no-repeat  center center;">
+        <div position="center" title="标题" class="center">
             <div id="winlinks">
                 <ul></ul>
             </div>
@@ -123,7 +134,7 @@
      $(function () {
             $("#layout1").ligerLayout();
      });
-    var LINKWIDTH = 90, LINKHEIGHT = 90, TASKBARHEIGHT = 43;
+    var LINKWIDTH = 90, LINKHEIGHT = 90, TASKBARHEIGHT = 80;
     var winlinksul =  $("#winlinks ul");
     function f_open(url, title, icon) {
         var win = $.ligerDialog.open(
@@ -148,6 +159,7 @@
 
     function onResize() {
         var linksHeight = $(window).height() - TASKBARHEIGHT;
+        console.log("linksHeight:",linksHeight)
         var winlinks = $("#winlinks");
         winlinks.height(linksHeight);
         var colMaxNumber = parseInt(linksHeight / LINKHEIGHT);//一列最多显示几个快捷方式

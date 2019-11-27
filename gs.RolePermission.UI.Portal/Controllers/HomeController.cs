@@ -11,7 +11,8 @@ namespace gs.RolePermission.UI.Portal.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            //return View();
+            return View("TreeIndex");
         }
     }
 }
