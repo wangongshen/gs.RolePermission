@@ -9,6 +9,6 @@ namespace gs.RolePermission.IBLL
 {
     public interface IUserInfoBll:IBaseBll<UserInfo>
     {
-
+        IQueryable<UserInfo> LoadPageData(Model.Param.UserQueryParam userQueryParam);
     }
 }

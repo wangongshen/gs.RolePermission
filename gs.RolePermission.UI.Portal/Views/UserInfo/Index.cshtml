@@ -22,6 +22,11 @@
     <link href="~/Content/ligerui/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" />
 </head>
 <body>
+    <div>
+        用户名：<input type="text" id="txtSchName" name="txtSchName" />
+        备注：<input type="text" id="txtSchRemark" name="txtSchRemark" />
+        <input type="button" id="btnSearch" value="搜索" />
+    </div>
     <table id="tt" style="width: 700px;" title="标题，可以使用代码进行初始化，也可以使用这种属性的方式" iconcls="icon-edit"></table>
     <!---------------弹出来的添加对话框 开始----------------->
     <div id="addFormDialogDiv">
@@ -69,7 +74,7 @@
         initTable();
         $('#addFormDialogDiv').css("display", "none");
         $('#editDialogDiv').css("display", "none");
-        //bindSearchBtnClick();
+        bindSearchBtnClick();
         //$('#setRoleDialogDiv').css("display", "none");
 
         //$('#setActionDialogDiv').css("display", "none");
@@ -78,7 +83,7 @@
     });
 
     //初始化表格
-    function initTable() {
+    function initTable(queryParam) {
         $('#tt').datagrid({
             url: '/UserInfo/GetAllUserInfos',//请求时自动传入rows：一页多少条记录，page：请求的当前页，供后台使用
             title: '用户管理',
@@ -92,7 +97,7 @@
             pageSize: 10,
             pageNumber: 1,
             pageList: [10, 20, 30],//提供每页多少条记录的选择
-            queryParams: {},//{ ID=u.Id,u.ModifyOn,u.Pwd,u.Remark,u.ShowName,u.SubTime,u.UName});
+            queryParams: queryParam,//{ ID=u.Id,u.ModifyOn,u.Pwd,u.Remark,u.ShowName,u.SubTime,u.UName});当请求远程数据时，发送的额外参数（为表格加载数据时，额外传输的参数）
             columns: [[
                 { field: 'ck', checkbox: true, align: 'left', width: fixWidth(0.1) },
                 { field: 'ID', title: '用户编号', width: fixWidth(0.1) },
@@ -161,6 +166,14 @@
         });
 
     }
+    //绑定搜索查询事件
+    function bindSearchBtnClick() {
+        $("#btnSearch").click(function () {
+            var data = { schName: $("#txtSchName").val(), schRemark: $("#txtSchRemark").val() };//json数据格式。获取前台用户名和备注文本框值
+            initTable(data);//初始化表格并传入该数据，也即让queryParams参数有了数据
+        })
+    }
+
     //当用户点击添加用户的时候，弹出一个添加对话框
     function addClickEvent() {
         $('#addFormDialogDiv').css("display", "block");
