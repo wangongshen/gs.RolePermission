@@ -11,7 +11,7 @@
     <title>系统登录</title>
     <script type="text/javascript">
         if (window.parent.window != window) {
-            window.top.location.href = "/Home/CheckLogin";
+            window.top.location.href = "/Home/index";
         }
         //改变请求的地址，页面就会重新请求，也验证码就会重新生成
         function changeCheckCode() {
@@ -26,7 +26,7 @@
         //点击登录后处理
         function afterLogin(data) {
             if (data == "ok") {
-                window.location.href = "/UserInfo/index";
+                window.location.href = "/Home/index";
             } else {
                 alert(data);
                 changeCheckCode();//验证码或用户名密码错误就重新生成一个验证码

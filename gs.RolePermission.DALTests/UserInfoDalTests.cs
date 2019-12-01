@@ -17,7 +17,7 @@ namespace gs.RolePermission.DAL.Tests
         {
             UserInfoDal dal = new UserInfoDal();
             UserInfo user = new UserInfo();
-            user.Uname = "曹操1103";
+            user.UName = "曹操1103";
             user.Pwd = "123456";
             user.ShowName = "曹阿瞒";
             bool sum = dal.Add(user);

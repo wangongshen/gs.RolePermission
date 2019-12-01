@@ -13,7 +13,7 @@ namespace gs.RolePermission.UI.Portal.Controllers
     //[MyActionFilterAttribute(Name ="写在类上的过滤器")]
     public class UserInfoController : BaseController
     {
-   
+
         //IUserInfoBll userInfoBll = new UserInfoBll();
         public IUserInfoBll userInfoBll { get; set; }
         // GET: UserInfo
@@ -38,7 +38,8 @@ namespace gs.RolePermission.UI.Portal.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Edit(int id) {
+        public ActionResult Edit(int id)
+        {
             ViewData.Model = userInfoBll.GetEntities(u => u.Id == id).FirstOrDefault();
             return View();
         }
@@ -55,13 +56,29 @@ namespace gs.RolePermission.UI.Portal.Controllers
             userInfoBll.Delete(id);
             return RedirectToAction("Index");
         }
-        
+
 
         public ActionResult Details(int id)
         {
-           ViewData.Model = userInfoBll.GetEntities(u=>u.Id==id).FirstOrDefault();
+            ViewData.Model = userInfoBll.GetEntities(u => u.Id == id).FirstOrDefault();
             return View();
         }
 
+        public ActionResult GetAllUserInfos()
+        {
+            //jquery easyUI:table:{total:88,rows:[{},{}]}//需要json数据格式
+            //jquery easyUI:table:在初始化时自动发送以下两个参数值
+            int pageSize = int.Parse(Request["rows"] ?? "10");
+            int pageIndex = int.Parse(Request["page"] ?? "1");
+            int total = 0;
+            //拿到当前页的数据
+            short delFlagNormal = (short)gs.RolePermission.Model.Enum.DelFlagEnum.Normal;
+            var pageData = userInfoBll.GetPageEntities(pageSize, pageIndex, out total, u => u.DelFlag == delFlagNormal, u => u.Id, true).Select(u => new { ID = u.Id, u.ModifyOn, u.Pwd, u.Remark, u.ShowName, u.SubTime, u.UName });//解决循环引用问题
+            //接下来需要把数据格式转换为table:{total:88,rows:[{},{}]}格式传给前台。怎么转呢？直接通过一个匿名类即可
+            var data = new { total = total, rows = pageData.ToList() };
+            //下面转为Json字符串格式，并输出至前台。允许是Get请求
+            return Json(data, JsonRequestBehavior.AllowGet);
+
+        }
     }
 }

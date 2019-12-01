@@ -11,18 +11,25 @@ namespace gs.RolePermission.Model
 {
     using System;
     using System.Collections.Generic;
-
-    [Serializable]
+    
     public partial class RoleInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public RoleInfo()
         {
+            this.ActionInfo = new HashSet<ActionInfo>();
             this.UserInfo = new HashSet<UserInfo>();
         }
     
         public int Id { get; set; }
+        public string RoleName { get; set; }
+        public short DelFlag { get; set; }
+        public string Remark { get; set; }
+        public Nullable<System.DateTime> ModifyOn { get; set; }
+        public Nullable<System.DateTime> SubTime { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ActionInfo> ActionInfo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserInfo> UserInfo { get; set; }
     }

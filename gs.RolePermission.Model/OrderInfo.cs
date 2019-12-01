@@ -11,11 +11,11 @@ namespace gs.RolePermission.Model
 {
     using System;
     using System.Collections.Generic;
-
-    [Serializable]
+    
     public partial class OrderInfo
     {
         public int Id { get; set; }
+        public short DelFlag { get; set; }
         public string Content { get; set; }
         public int UserInfoId { get; set; }
     

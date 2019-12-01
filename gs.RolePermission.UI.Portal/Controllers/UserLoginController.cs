@@ -27,7 +27,7 @@ namespace gs.RolePermission.UI.Portal.Controllers
         {
             if (Request.Cookies["userLoginId"] != null)//表示用户没有登录
             {
-                return RedirectToAction("Index", "UserInfo");
+                return RedirectToAction("Index", "Home");
             }
             return View();
         }
@@ -76,7 +76,7 @@ namespace gs.RolePermission.UI.Portal.Controllers
             string name = Request["LoginCode"];
             string pwd = Request["LoginPwd"];
             short delNormal = (short)gs.RolePermission.Model.Enum.DelFlagEnum.Normal;
-            var userInfo = UserInfoBll.GetEntities(u => u.Uname == name && u.Pwd == pwd && u.DelFlag == delNormal).FirstOrDefault();
+            var userInfo = UserInfoBll.GetEntities(u => u.UName == name && u.Pwd == pwd && u.DelFlag == delNormal).FirstOrDefault();
             if (userInfo == null)
             {
                 return Content("用户名或密码错误！");
@@ -87,7 +87,7 @@ namespace gs.RolePermission.UI.Portal.Controllers
             //string userLoginId = Guid.NewGuid().ToString();
             string userLoginId = Guid.NewGuid().ToString("N");
             //把用户数据写到mm/HttpRuntimeCache 缓存里面去。如何解决变化点：1。可能写到不同地方（机器）去 2.可能同时写到不同地方去
-            Common.Cache.CacheHelper.AddCache(userLoginId, userInfo, DateTime.Now.AddMinutes(1));
+            Common.Cache.CacheHelper.AddCache(userLoginId, userInfo, DateTime.Now.AddMinutes(60));
             //到Common层封装一个mm，现在Common层新建文件夹Cache,下面先新建一个CacheHelper.cs，封装AddCache、GetCache方法，再新建一个ICacheWriter.cs接口，接口里面也就是写AddCache、GetCache方法结构
             //然后分别添加实现ICacheWriter接口的方法。MemcacheWriter.cs和HttpRuntimeCacheWriter.cs（单机版）
 
@@ -95,11 +95,11 @@ namespace gs.RolePermission.UI.Portal.Controllers
             Response.Cookies["userLoginId"].Value = userLoginId;
 
             //记住用户名、密码。下面7句后加的
-            HttpCookie ckUid = new HttpCookie("ckUid", userInfo.Uname);
+            HttpCookie ckUid = new HttpCookie("ckUid", userInfo.UName);
             HttpCookie ckPwd = new HttpCookie("ckPwd", userInfo.Pwd);
             ckUid.Expires = DateTime.Now.AddDays(3);
             ckPwd.Expires = DateTime.Now.AddDays(3);
-            Response.Cookies["userLoginId"].Expires = DateTime.Now.AddMinutes(1);
+            Response.Cookies["userLoginId"].Expires = DateTime.Now.AddMinutes(60);
             Response.Cookies.Add(ckUid);
             Response.Cookies.Add(ckPwd);
             //第三步：如果正确跳转到首页

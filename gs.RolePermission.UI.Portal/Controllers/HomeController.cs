@@ -6,13 +6,13 @@ using System.Web.Mvc;
 
 namespace gs.RolePermission.UI.Portal.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         // GET: Home
         public ActionResult Index()
         {
             //return View();
-            return View("TreeIndex");
+            return View();
         }
     }
 }

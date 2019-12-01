@@ -48,7 +48,7 @@ namespace gs.RolePermission.UI.Portal.Controllers
                 }
                 LoginUser = userInfo;
                 //下面还要把缓存超时时间又重新设置（20分钟）
-                CacheHelper.SetCache(userGuid, userInfo, DateTime.Now.AddMinutes(1));//这个实现就是先清掉缓存，然后重新加一个，
+                CacheHelper.SetCache(userGuid, userInfo, DateTime.Now.AddMinutes(60));//这个实现就是先清掉缓存，然后重新加一个，
             }
         }
     }
