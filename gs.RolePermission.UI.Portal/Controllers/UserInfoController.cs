@@ -38,23 +38,45 @@ namespace gs.RolePermission.UI.Portal.Controllers
             return RedirectToAction("Index");
         }
 
+        #region 修改
         public ActionResult Edit(int id)
         {
+            //往前台传数据
             ViewData.Model = userInfoBll.GetEntities(u => u.Id == id).FirstOrDefault();
             return View();
         }
+        #endregion
 
         [HttpPost]
         public ActionResult Edit(UserInfo userInfo)
         {
             userInfoBll.Update(userInfo);
-            return RedirectToAction("Index");
+            return Content("ok");
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string ids)
         {
-            userInfoBll.Delete(id);
-            return RedirectToAction("Index");
+            if (string.IsNullOrEmpty(ids))
+            {
+                return Content("请选中要删除的数据");
+            }
+            //正常处理
+            //1逐个删除，在每个循环里面调用Delete方法都要执行DbSession.SaveChanges() > 0，即与数据库发生交互,而且这是真删除，而且以后每个实体都有删除，那么每个控制器都要写这些方法代码。
+            //string[] strIds = ids.Split(',');
+            //foreach (var strId in strIds)
+            //{
+            //    userInfoBll.Delete(new UserInfo() { Id = int.Parse(strId) });
+            //}
+
+            string[] strIds = ids.Split(',');
+            List<int> idList = new List<int>();
+            foreach (var strId in strIds)
+            {
+                idList.Add(int.Parse(strId));
+            }
+            //userInfoBll.DeleteList(idList);
+            userInfoBll.DeleteListByLogical(idList);//逻辑删除
+            return Content("ok");
         }
 
 
@@ -79,6 +101,17 @@ namespace gs.RolePermission.UI.Portal.Controllers
             //下面转为Json字符串格式，并输出至前台。允许是Get请求
             return Json(data, JsonRequestBehavior.AllowGet);
 
+        }
+
+        //添加用户
+        public ActionResult Add(UserInfo userInfo)
+        {
+            userInfo.UName = Request["UName"];//由于前台的name属性值与后台的属性值相同，具有自动装备功能，不需要赋值即可，当然你赋值也可一定，剩下的Pwd等属性值就不赋值了。
+            userInfo.ModifyOn = DateTime.Now;
+            userInfo.SubTime = DateTime.Now;
+            userInfo.DelFlag = (short)gs.RolePermission.Model.Enum.DelFlagEnum.Normal;
+            userInfoBll.Add(userInfo);
+            return Content("ok");
         }
     }
 }

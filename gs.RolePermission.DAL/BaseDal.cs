@@ -136,13 +136,13 @@ namespace gs.RolePermission.DAL
         }
         public int DeleteListByLogical(List<int> ids)
         {
-            //foreach (var id in ids)
-            //{
-            //    var entity = dmc.Set<T>().Find(id);
+            foreach (var id in ids)
+            {
+                var entity = dmc.Set<T>().Find(id);
 
-            //    dmc.Entry(entity).Property("DelFlag").CurrentValue = (short)gs.RolePermission.Model.Enum.DelFlagEnum.Deleted;
-            //    dmc.Entry(entity).Property("DelFlag").IsModified = true;//把DelFlag列标记为修改状态，而且这样写死了就要求所有实体都应该有DelFlag属性
-            //}
+                dmc.Entry(entity).Property("DelFlag").CurrentValue = (short)gs.RolePermission.Model.Enum.DelFlagEnum.Deleted;
+                dmc.Entry(entity).Property("DelFlag").IsModified = true;//把DelFlag列标记为修改状态，而且这样写死了就要求所有实体都应该有DelFlag属性
+            }
             return 1;
         }
     }

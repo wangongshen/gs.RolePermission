@@ -10,64 +10,258 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <link href="~/Content/jquery-easyui-1.3.1/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-easyui-1.3.1/themes/icon.css" rel="stylesheet" />
+    <link href="~/Content/tableStyle.css" rel="stylesheet" />
     <script src="~/Content/jquery-easyui-1.3.1/jquery-1.8.0.min.js"></script>
     <script src="~/Content/jquery-easyui-1.3.1/jquery.easyui.min.js"></script>
     <script src="~/Content/jquery-easyui-1.3.1/locale/easyui-lang-zh_CN.js"></script>
-    <link href="~/Content/jquery-easyui-1.3.1/themes/default/easyui.css" rel="stylesheet" />
-    <link href="~/Content/jquery-easyui-1.3.1/themes/icon.css" rel="stylesheet" />
     <script src="~/Scripts/datapattern.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Content/ligerui/Source/lib/ligerUI/js/ligerui.min.js"></script>
+    <link href="~/Content/ligerui/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" />
 </head>
-
 <body>
     <table id="tt" style="width: 700px;" title="标题，可以使用代码进行初始化，也可以使用这种属性的方式" iconcls="icon-edit"></table>
+    <!---------------弹出来的添加对话框 开始----------------->
+    <div id="addFormDialogDiv">
+        <div id="addFormDialogDiv">
+            @using (Ajax.BeginForm("Add", "UserInfo", new AjaxOptions() { OnSuccess = "afterAdd" }))
+            {
+                //整体异步提交，需要在前面引入jquery.unobtrusive-ajax.js和jquery-1.7.1.min.js
+                <table class="hovertable" style="width:100%">
+                    <tr><td style="width:30%; text-align:right">用户名</td><td style="width:70%"><input type="text" name="UName" /></td></tr>
+                    <tr><td style="width:30%; text-align:right">密码</td><td style="width:70%"><input type="text" name="Pwd" /></td></tr>
+                    <tr><td style="width:30%; text-align:right">备注</td><td style="width:70%"><input type="text" name="Remark" /></td></tr>
+                    <tr><td style="width:30%; text-align:right">昵称</td><td style="width:70%"><input type="text" name="ShowName" /></td></tr>
+                </table>
+            }
+        </div>
+    </div>
+    <!---------------弹出来的添加对话框 结束----------------->
+    <!---------------弹出来的修改对话框 开始----------------->
+    <div id="editDialogDiv">
+        <iframe id="editFrame" src="javascript:void(0)" frameborder="0" width="100%" height="100%" scrolling="no"></iframe>
+    </div>
+    <!---------------弹出来的修改对话框 结束----------------->
+    <!---------------2.2弹出来的设置用户角色对话框 开始----------------->
+    <div id="setRoleDialogDiv">
+        <iframe id="setRoleFrame" src="javascript:void(0)" frameborder="0" width="100%" height="100%" scrolling="no"></iframe>
+    </div>
+    <!---------------弹出来的设置用户角色对话框 结束----------------->
+    <!---------------弹出来的设置特殊权限对话框 开始----------------->
+    <div id="setActionDialogDiv">
+        <iframe id="setActionFrame" src="javascript:void(0)" frameborder="0" width="100%" height="100%" scrolling="no"></iframe>
+    </div>
+    <!-----------弹出来的设置特殊权限对话框 结束----------------->
 </body>
 </html>
 <script type="text/javascript">
-     $(function () {
-            initTable();
+    $(function () {
+        $(window).resize(function () {
+            $('#tt').datagrid('resize', {     //根据自身情况更改
+                width: $(window).width() - 10,  //根据自身情况更改
+                height: $(window).height() - 35 //根据自身情况更改
+            });
         });
-        //初始化表格
-        function initTable() {
-            $('#tt').datagrid({
-                url: '/UserInfo/GetAllUserInfos',//请求时自动传入rows：一页多少条记录，page：请求的当前页，供后台使用
-                title: '用户管理',
-                width: 680,
-                height: 380,
-                fitColumns: true,//是否自适应列
-                idField: 'ID',//一定要与后端返回的名称一致，所以ID=u.Id指定为ID,否则会导致拿不到数据等问题{ ID=u.Id,u.ModifyOn,u.Pwd,u.Remark,u.ShowName,u.SubTime,u.UName})
-                loadMsg: '正在加载用户的信息...',
-                pagination: true,//是否分页
-                singleSelect: false,//是否只能单选
-                pageSize: 10,
-                pageNumber: 1,
-                pageList: [10, 20, 30],//提供每页多少条记录的选择
-                queryParams: {},//{ ID=u.Id,u.ModifyOn,u.Pwd,u.Remark,u.ShowName,u.SubTime,u.UName});
-                columns: [[
-                    { field: 'ck', checkbox: true, align: 'left', width: 50 },
-                    { field: 'ID', title: '用户编号', width: 80 },
-                    { field: 'UName', title: '用户名', width: 120 },
-                    { field: 'Pwd', title: '密码', width: 120 },
-                    { field: 'Remark', title: '备注', width: 120 },
-                    //{
-                    //    field: 'SubTime', title: '提交时间', width: 80, align: 'right',
-                    //    formatter: function (value, row, index) {
-                    //        return (eval(value.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"))).pattern("yyyy-M-d h:m:s.S");
-                    //    }
-                    //}//这个日期转换用到第三方插件datapattern.js，先复制到Scripts文件夹下，然后再上面导入
-                    
-                ]],
-                toolbar: [{
+    });
+    $(function () {
+        initTable();
+        $('#addFormDialogDiv').css("display", "none");
+        $('#editDialogDiv').css("display", "none");
+        //bindSearchBtnClick();
+        //$('#setRoleDialogDiv').css("display", "none");
+
+        //$('#setActionDialogDiv').css("display", "none");
+
+
+    });
+
+    //初始化表格
+    function initTable() {
+        $('#tt').datagrid({
+            url: '/UserInfo/GetAllUserInfos',//请求时自动传入rows：一页多少条记录，page：请求的当前页，供后台使用
+            title: '用户管理',
+            width: 680,
+            height: 380,
+            fitColumns: true,//是否自适应列
+            idField: 'ID',//一定要与后端返回的名称一致，所以ID=u.Id指定为ID,否则会导致拿不到数据等问题{ ID=u.Id,u.ModifyOn,u.Pwd,u.Remark,u.ShowName,u.SubTime,u.UName})
+            loadMsg: '正在加载用户的信息...',
+            pagination: true,//是否分页
+            singleSelect: false,//是否只能单选
+            pageSize: 10,
+            pageNumber: 1,
+            pageList: [10, 20, 30],//提供每页多少条记录的选择
+            queryParams: {},//{ ID=u.Id,u.ModifyOn,u.Pwd,u.Remark,u.ShowName,u.SubTime,u.UName});
+            columns: [[
+                { field: 'ck', checkbox: true, align: 'left', width: fixWidth(0.1) },
+                { field: 'ID', title: '用户编号', width: fixWidth(0.1) },
+                { field: 'UName', title: '用户名', width: fixWidth(0.15) },
+                { field: 'Pwd', title: '密码', width: fixWidth(0.15) },
+                { field: 'Remark', title: '备注', width: fixWidth(0.15) },
+                {
+                    field: 'SubTime', title: '提交时间', width: fixWidth(0.1), align: 'right',
+                    formatter: function (value, row, index) {
+                        return (eval(value.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"))).pattern("yyyy-M-d h:m:s.S");
+                    }
+                }//这个日期转换用到第三方插件datapattern.js，先复制到Scripts文件夹下，然后再上面导入
+
+            ]],
+            toolbar: [
+                {
                     id: 'btnDownShelf',
                     text: '添加用户',
                     iconCls: 'icon-add',
                     handler: function () {
-                        alert("测试，后期完善");
+                        addClickEvent();
+                    }
+                },
+                {
+                    id: 'btnDelete',
+                    text: '删除',
+                    iconCls: 'icon-cancel',
+                    handler: function () {
+                        deleteEvent();
+                    }
+                }, {
+                    id: 'btnEdit',
+                    text: '修改',
+                    iconCls: 'icon-edit', //有没有这种图标查看Content\jquery-easyui-1.3.1\themes\icon.css是否有这样的样式
+                    handler: function () {
+                        editEvent();
                     }
                 }],
-                onHeaderContextMenu: function (e, field) {
+            onHeaderContextMenu: function (e, field) {
 
+            }
+        });
+
+    }
+    //当用户点击添加用户的时候，弹出一个添加对话框
+    function addClickEvent() {
+        $('#addFormDialogDiv').css("display", "block");
+        $('#addFormDialogDiv').dialog({
+            title: "添加用户",
+            modal: true,
+            width: 400,
+            height: 400,
+            collapsible: true,
+            minimizable: true,
+            maximizable: true,
+            resizable: true,
+            buttons: [{
+                id: 'btnOk',
+                text: '添加',
+                iconCls: 'icon-ok',//有没有这种图标查看Content\jquery-easyui-1.3.1\themes\icon.css是否有这样的样式
+                handler: subAddForm//后面无标点符号的
+            }, {
+                id: 'btnCancel',
+                text: '取消',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#addFormDialogDiv').dialog("close");
                 }
-            });
+            }],
+            //toolbar: {
 
+            //}
+        })
+    }
+
+    //把表单提交到后台
+    function subAddForm() {
+        $("#addFormDialogDiv form").submit();//  把ID为addFormDialogDiv下的表单整体异步提交
+    }
+    //添加成功之后执行代码
+    function afterAdd(data) {
+        if (data == "ok") {
+            //关闭对话框，刷新表格
+            $('#addFormDialogDiv').dialog("close");
+            initTable();
+        } else {
+            $.messager.alert(data);
         }
+    }
+    //让各列宽度占一定比例
+    function fixWidth(percent) {
+        return document.body.clientWidth * percent;
+    }
+
+    //当删除按钮被点击时执行
+    function deleteEvent() {
+        //1.拿到easyui里面被选中的项，参见jQuery EasyUI 1.2 API文档
+        var selectedRows = $('#tt').datagrid("getSelections");
+        if (selectedRows.length <= 0) {
+            $.messager.alert("提醒", "请选择要删除的数据", "warning");
+            return;
+        } else {
+            $.ligerDialog.confirm('确定要删除吗？', function (confirm) {
+                if (confirm) {
+                    //2.把数据删除
+                    //2.1获取要删除数据的ID,这个ID是与下面截图那步ID名称保持一致
+                    var ids = "";
+                    for (var key in selectedRows) {
+                        ids = ids + selectedRows[key].ID + ",";
+                    }
+                    ids = ids.substring(0, ids.length - 1);
+                    //2.2把要删除的ID通过发送异步请求到后台去处理
+                    $.post("/UserInfo/Delete", { ids: ids }, function (data) {
+                        if (data == "ok") {
+                            initTable();
+                            //ligerui选中行删除后，释放选中状态
+                            $("#tt").datagrid('clearSelections');
+                        } else {
+                            $.messager.alert("提示", "删除失败", "error");
+                        }
+                    });
+                }
+            })
+        }
+    }
+
+    function editEvent() {
+        //校验是否只选中一个用户
+        var selectedRows = $('#tt').datagrid("getSelections");
+        if (selectedRows.length != 1) {
+            $.messager.alert("提醒", "请选择要修改的1行数据", "warning");
+            return;
+        }
+
+        //给editFrame的src属性赋值
+        $('#editFrame').attr("src", "/UserInfo/Edit/" + selectedRows[0].ID);
+
+        $('#editDialogDiv').css("display", "block");
+        $('#editDialogDiv').dialog({
+            title: "修改用户",
+            modal: true,
+            width: 400,
+            height: 400,
+            collapsible: true,
+            minimizable: true,
+            maximizable: true,
+            resizable: true,
+            buttons: [{
+                id: 'btnOk',
+                text: '修改',
+                iconCls: 'icon-ok',
+                handler: function () {
+                    $("#editFrame")[0].contentWindow.submitForm();
+                }
+            }, {
+                id: 'btnCancel',
+                text: '取消',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#editDialogDiv').dialog("close");
+                }
+            }],
+        })
+    }
+    
+    //修改成功之后调用
+    function afterEditSuccess() {
+        $('#editDialogDiv').dialog("close");//关闭窗口
+        initTable();//刷新表格
+    }
+
 </script>

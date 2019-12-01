@@ -10,52 +10,103 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Edit</title>
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript">
+        function afterEdit(data) {
+            if (data == "ok") {
+                window.parent.window.afterEditSuccess();//在子窗体调用父窗体的方法
+            } else {
+                alert("修改失败");
+            }
+
+        }
+        function submitForm() {
+            $("form").submit();//提交form表单
+        }
+
+
+    </script>
 </head>
 <body>
-    @using (Html.BeginForm())
+    @*改为异步提交*@
+    @using (Ajax.BeginForm(new AjaxOptions() { OnSuccess = "afterEdit" }))
     {
         @Html.AntiForgeryToken()
-        
+
         <div class="form-horizontal">
-            <h4>修改信息</h4>
+            <h4>修改用户信息</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.Id)
-    
+
             <div class="form-group">
-                姓名：
+                @Html.LabelFor(model => model.UName, "用户名", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Uname, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Uname, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.UName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UName, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
-                密码：
+                @Html.LabelFor(model => model.Pwd, "密码", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Pwd, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Pwd, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
-                昵称：
+                @Html.LabelFor(model => model.ShowName, "真实姓名", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.ShowName, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.ShowName, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.DelFlag, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    @Html.HiddenFor(model => model.DelFlag, new { htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.ValidationMessageFor(model => model.DelFlag, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Remark, "备注", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.ModifyOn, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    @Html.HiddenFor(model => model.ModifyOn, new { htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.ValidationMessageFor(model => model.ModifyOn, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.SubTime, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    @Html.HiddenFor(model => model.SubTime, new { htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.ValidationMessageFor(model => model.SubTime, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="修改" class="btn btn-default" />
+                    <input type="submit" value="保存" class="btn btn-default" />
                 </div>
             </div>
         </div>
     }
-    
-    <div>
-        @Html.ActionLink("返回主页面", "Index")
-    </div>
+
+    @*<div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>*@
 </body>
 </html>
+
