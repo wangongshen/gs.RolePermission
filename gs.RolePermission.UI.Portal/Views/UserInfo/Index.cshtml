@@ -98,11 +98,19 @@
                 { field: 'ID', title: '用户编号', width: fixWidth(0.1) },
                 { field: 'UName', title: '用户名', width: fixWidth(0.15) },
                 { field: 'Pwd', title: '密码', width: fixWidth(0.15) },
-                { field: 'Remark', title: '备注', width: fixWidth(0.15) },
+                { field: 'Remark', title: '备注', width: fixWidth(0.2) },
                 {
                     field: 'SubTime', title: '提交时间', width: fixWidth(0.1), align: 'right',
                     formatter: function (value, row, index) {
                         return (eval(value.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"))).pattern("yyyy-M-d h:m:s.S");
+                    }
+                },
+                {
+                    field: 'DelFlag', title: '操作', width: fixWidth(0.1), formatter: function (value, row, index) {
+                        var str = "";
+                        str += "<a href='javascript:void(0)' class='editLink'  uid='" + row.ID + "'>修改</a> &nbsp;&nbsp;";
+                        str += "<a href='javascript:void(0)' class='deleteLink'  uid='" + row.ID + "'>删除</a>";
+                        return str;
                     }
                 }//这个日期转换用到第三方插件datapattern.js，先复制到Scripts文件夹下，然后再上面导入
 
@@ -128,11 +136,27 @@
                     text: '修改',
                     iconCls: 'icon-edit', //有没有这种图标查看Content\jquery-easyui-1.3.1\themes\icon.css是否有这样的样式
                     handler: function () {
-                        editEvent();
+                        //校验是否只选中一个用户
+                        var selectedRows = $('#tt').datagrid("getSelections");
+                        if (selectedRows.length != 1) {
+                            $.messager.alert("提醒", "请选择要修改的1行数据", "warning");
+                            return;
+                        }
+                        editEvent(selectedRows[0].ID);
                     }
                 }],
             onHeaderContextMenu: function (e, field) {
 
+            },
+            onLoadSuccess: function (data) {
+                $('.editLink').click(function () {//表格初始化后绑定修改事件
+                    editEvent($(this).attr("uid"));
+                    return false;//取消单击修改连接时选中当前行
+                });
+                $('.deleteLink').click(function () {//表格初始化后绑定修改事件
+                    deleteLinkEvent($(this).attr("uid"));
+                    return false;//取消单击修改连接时选中当前行
+                })
             }
         });
 
@@ -219,16 +243,25 @@
         }
     }
 
-    function editEvent() {
-        //校验是否只选中一个用户
-        var selectedRows = $('#tt').datagrid("getSelections");
-        if (selectedRows.length != 1) {
-            $.messager.alert("提醒", "请选择要修改的1行数据", "warning");
-            return;
-        }
+    //当删除按钮被点击时执行
+    function deleteLinkEvent(id) {
+        $.ligerDialog.confirm('确定要删除吗？', function (confirm) {
+            if (confirm) {
+                //把要删除的ID通过发送异步请求到后台去处理
+                $.post("/UserInfo/Delete", { ids: id }, function (data) {
+                    if (data == "ok") {
+                        initTable();
+                    } else {
+                        $.messager.alert("提示", "删除失败", "error");
+                    }
+                });
+            }
+        })
+    }
 
+    function editEvent(id) {
         //给editFrame的src属性赋值
-        $('#editFrame').attr("src", "/UserInfo/Edit/" + selectedRows[0].ID);
+        $('#editFrame').attr("src", "/UserInfo/Edit/" + id);
 
         $('#editDialogDiv').css("display", "block");
         $('#editDialogDiv').dialog({
@@ -257,7 +290,7 @@
             }],
         })
     }
-    
+
     //修改成功之后调用
     function afterEditSuccess() {
         $('#editDialogDiv').dialog("close");//关闭窗口
