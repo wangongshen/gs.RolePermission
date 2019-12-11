@@ -1629,6 +1629,7 @@
     <Content Include="Scripts\ligerResizable.js" />
     <Content Include="Scripts\ligerui.all.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\MyAjaxForm.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1648,10 +1649,12 @@
     <Content Include="Views\UserLogin\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\TreeIndex.cshtml" />
+    <Content Include="Views\ActionInfo\Index.cshtml" />
+    <Content Include="Views\ActionInfo\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ActionInfo\" />
+    <Folder Include="UploadFiles\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

@@ -5,4 +5,6 @@
   </object>
   <object name="OrderInfoBll" type="gs.RolePermission.BLL.OrderInfoBll, gs.RolePermission.BLL" singleton="false" >
   </object>
+  <object name="ActionInfoBll" type="gs.RolePermission.BLL.ActionInfoBll, gs.RolePermission.BLL" singleton="false" >
+  </object>
 </objects>

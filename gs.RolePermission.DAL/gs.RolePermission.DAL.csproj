@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionInfoDal.cs" />
     <Compile Include="BaseDal.cs" />
     <Compile Include="DbContentFactory.cs" />
     <Compile Include="OrderInfoDal.cs" />

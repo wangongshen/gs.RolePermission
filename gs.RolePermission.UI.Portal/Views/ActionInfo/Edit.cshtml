@@ -1,0 +1,177 @@
+﻿@model gs.RolePermission.Model.ActionInfo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <link href="~/Content/tableStyle.css" rel="stylesheet" />
+    <script src="~/Scripts/MyAjaxForm.js"></script>
+    <script type="text/javascript">
+        function afterEdit(data) {
+            if (data == "ok") {
+                window.parent.window.afterEditSuccess();
+                //window.opener.afterEditSuccess();
+                //alert("dddddd");
+            } else {
+                alert("修改失败");
+            }
+        }
+        //单击窗体右下侧的【修改】按钮也提交表单处理
+        function submitForm() {
+            $("form").submit();//提交form表单
+        }
+        $(function () {
+            //@ViewBag.hmList写在js代码中，一定要用引号括起来
+            if ("@ViewBag.hmList" == "GET") {//根据后端传过来的值决定哪项被选择。
+                var aLinkobj1 = $("<option value='GET' id='GET' selected='selected'>GET</option>");
+                var aLinkobj2 = $("<option value='POST' id='GET'>POST</option>");
+                //2.将超链接加入到div中
+                $('#selectedHttpMethod').append(aLinkobj1);
+                $('#selectedHttpMethod').append(aLinkobj2);
+            }
+            else {
+            var aLinkobj3 = $("<option value='GET' id='GET'>GET</option>");
+            var aLinkobj4 = $("<option value='POST' id='GET' selected='selected'>POST</option>");
+            //2.将超链接加入到div中
+            $('#selectedHttpMethod').append(aLinkobj3);
+            $('#selectedHttpMethod').append(aLinkobj4);
+            }
+            bindUploadBtnClick();
+        })
+        //绑定上传图片按钮的单击事件
+        function bindUploadBtnClick() {
+            $("#btnUploadFile").click(function () {
+                //下面的 不要用类似 $("#addFormDialogDiv form").ajaxSubmit({这句
+                $("form").ajaxSubmit({
+                    url: "/ActionInfo/UpLoadImage",
+                    type: "Post",
+                    success: function (data) {
+                        //把返回的url地址放到页面的隐藏域里面去
+                        $("#MenuIcon").val(data);
+                        $("#uploadImg").html("<img src='" + data + "' style='width:40px;height:40px;' />");
+                    }
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+    @using (Ajax.BeginForm(new AjaxOptions() { OnSuccess = "afterEdit" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.DelFlag, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.DelFlag, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.ValidationMessageFor(model => model.DelFlag, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.ModifyOn, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.ModifyOn, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.ValidationMessageFor(model => model.ModifyOn, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.SubTime, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.SubTime, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.ValidationMessageFor(model => model.SubTime, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+        <table class="hovertable" style="width:100%">
+            <tr>
+                <td style="width:30%; text-align:right">
+                    @Html.LabelFor(model => model.ActionName, "权限名称", htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td style="width:70%">
+                    @Html.EditorFor(model => model.ActionName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ActionName, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td style="width:30%; text-align:right">
+                    @Html.LabelFor(model => model.Url, "URL", htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td style="width:70%">
+                    @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td style="width:30%; text-align:right">
+                    @Html.LabelFor(model => model.HttpMethod, "Http方法类型", htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td style="width:70%">
+                    <select name="HttpMethod" id="selectedHttpMethod"></select>
+                    @Html.ValidationMessageFor(model => model.HttpMethod, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td style="width:30%; text-align:right">
+                    @Html.LabelFor(model => model.IsMenu, "是否为菜单", htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td style="width:70%">
+                    @Html.CheckBox("IsMenu", (bool)ViewBag.isMenu)
+                    @Html.ValidationMessageFor(model => model.IsMenu, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td style="width:30%; text-align:right">
+                    @Html.LabelFor(model => model.MenuIcon, "菜单图标地址", htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td style="width:70%">
+
+                    @Html.Editor("MenuIcon", (string)ViewBag.pathMenu)
+                    <div id="uploadImg">
+                        <img src=@ViewBag.pathMenu style='width:40px;height:40px;' />
+                    </div>
+                    <input type="hidden" id="MenuIcon" name="MenuIcon" />
+                    <input type="file" id="fileMenuIcon" name="fileMenuIcon" />
+                    <input type="button" id="btnUploadFile" value="上传" />
+                    @Html.ValidationMessageFor(model => model.MenuIcon, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td style="width:30%; text-align:right">
+                    @Html.LabelFor(model => model.Sort, "排序", htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td style="width:70%">
+                    @Html.EditorFor(model => model.Sort, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Sort, "", new { @class = "text-danger" })
+                </td>
+            <tr>
+                <td style="width:30%; text-align:right">
+                    @Html.LabelFor(model => model.Remark, "备注", htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td style="width:70%">
+                    @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center">
+                    <input type="submit" value="保存" class="btn btn-default" />
+                </td>
+            </tr>
+        </table>
+    }
+
+    @*<div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>*@
+</body>
+</html>

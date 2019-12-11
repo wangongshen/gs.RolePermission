@@ -11,6 +11,10 @@ namespace gs.RolePermission.Common.Cache
     {
         //redis服务IP和端口
         static RedisClient redisClient = new RedisClient("m.xmbygy.com", 6380);
+
+        RedisCacheWriter() {
+            redisClient.Password = "redis0820";
+        }
         //private RedisClient redisClient;
         //public RedisCacheWriter()
         //{

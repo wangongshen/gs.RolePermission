@@ -10,4 +10,7 @@
   <object type="gs.RolePermission.UI.Portal.Controllers.UserLoginController, gs.RolePermission.UI.Portal" singleton="false" >
     <property name="UserInfoBll" ref="UserInfoBll" />
   </object>
+  <object type="gs.RolePermission.UI.Portal.Controllers.ActionInfoController, gs.RolePermission.UI.Portal" singleton="false" >
+    <property name="ActionInfoBll" ref="ActionInfoBll" />
+  </object>
  </objects>
