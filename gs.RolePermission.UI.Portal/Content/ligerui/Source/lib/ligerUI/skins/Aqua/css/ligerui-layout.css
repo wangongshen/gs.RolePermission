@@ -3,7 +3,7 @@
    *   layout  *
 * ------------ */
 .l-layout{ position:relative;}
-.l-layout-left,.l-layout-right,.l-layout-center,.l-layout-top,.l-layout-bottom{position:absolute;border:1px solid #BED5F3; background:white; z-index:10; overflow:hidden;} 
+.l-layout-left,.l-layout-right,.l-layout-center,.l-layout-top,.l-layout-bottom{position:absolute;border:1px solid #BED5F3; background:white; z-index:20; overflow:hidden;} 
 .l-layout-top{width:100%;}
 .l-layout-bottom{width:100%}
 

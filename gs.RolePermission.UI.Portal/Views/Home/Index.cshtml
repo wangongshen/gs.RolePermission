@@ -1,22 +1,22 @@
-﻿
+﻿@using XDZ.RolePermission.Model;
+@using System.Text;
+@{
+    ViewBag.Title = "Home Page";
+}
 @{
     Layout = null;
 }
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
     <link href="~/Content/ligerui/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" />
-
     <script src="~/Content/ligerui/Source/lib/jquery/jquery-1.3.2.min.js"></script>
     <script src="~/Content/ligerui/Source/lib/ligerUI/js/core/base.js"></script>
     <script src="~/Content/ligerui/Source/lib/ligerUI/js/plugins/ligerDrag.js"></script>
     <script src="~/Content/ligerui/Source/lib/ligerUI/js/plugins/ligerDialog.js"></script>
-    <script src="~/Content/ligerui/Source/lib/ligerUI/js/plugins/ligerLayout.js"></script>
     <script src="~/Content/ligerui/Source/lib/ligerUI/js/plugins/ligerResizable.js"></script>
-    <script src="~/Scripts/ligerui.all.js"></script>
-
+    <script src="~/Content/ligerui/Source/lib/ligerUI/js/ligerui.all.js"></script>
     <script type="text/javascript">
         $(function () {
             window.history.forward(1);//作用不能通过后退按钮返回上一页面(一前进一后退)
@@ -133,13 +133,7 @@
 
         #top_left {
             width: 70%;
-            height:30%;
             float: left;
-        }
-
-        .top_leftImg {
-            width:100%;
-            height:100%;
         }
 
         #top_right {
@@ -153,23 +147,35 @@
             font-size: 14px;
         }
     </style>
-    @{
-        //List<ActionInfo> menus = ViewBag.AllMenu;
-        //StringBuilder sb = new StringBuilder();
-        //foreach (var actionInfo in menus)
-        //{
-        //    //{ icon: '/Content/Images/Home/3DSMAX.png', title: '用户管理', url: '/UserInfo/index' },
-        //    sb.Append("{");
-        //    sb.AppendFormat("icon:'{0}',title: '{1}',url:'{2}'", actionInfo.MenuIcon, actionInfo.ActionName, actionInfo.Url);
-        //    sb.Append("},");
-        //}
-        //string str = sb.ToString().TrimEnd(',');
-    }
+    @*@{
+        List<ActionInfo> menus = ViewBag.AllMenu;
+        StringBuilder sb = new StringBuilder();
+        foreach (var actionInfo in menus)
+        {
+            //{ icon: '/Content/Images/Home/3DSMAX.png', title: '用户管理', url: '/UserInfo/index' },
+            sb.Append("{");
+            sb.AppendFormat("icon:'{0}',title: '{1}',url:'{2}'", actionInfo.MenuIcon, actionInfo.ActionName, actionInfo.Url);
+            sb.Append("},");
+        }
+        string str = sb.ToString().TrimEnd(',');
+    }*@
 
 </head>
 <body>
     <div id="layout1">
-        <div position="top" style="overflow: hidden;background: url(/Content/Images/Home/bgtop.png) repeat-x center center;">
+        <div position="center" title="" style="overflow: hidden; background: url(/Content/Images/Home/bj.gif) no-repeat;background-size:100% 100%;background-attachment: fixed;">
+            <div id="winlinks">
+                <ul></ul>
+            </div>
+        </div>
+        @*<div position="top" style="overflow: hidden;background: url(/Content/Images/Home/bgtop.png) repeat-x center center;">
+            <div id="top_left">
+                <img src="~/Content/Images/Home/logo.jpg" style="float:left;padding-left:20px;" />
+                <div><h1 style="float:left;padding-top:15px; padding-left:20px;">企业级系统架构设计实战精讲</h1></div>
+                <div>
+                    <h2 style="padding-top:50px; padding-left:20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;——以【通用角色权限管理系统】为例贯穿讲解</h2>
+                </div>
+            </div>
             <div id="top_right">
                 <div id="top_right1" style="float:left;width:50%">
                     <img src="~/Content/Images/Home/CurrentUser.png" style="float:left;padding-right:20px;padding-top:10px; width:50px; height:50px;" /> <h3 style="padding-top:15px;">@ViewData["LoginName"]</h3>
@@ -182,29 +188,22 @@
                     <a href='/UserLogin/LogOff' id="loginOut" class="exit">安全退出</a>
                 </div>
             </div>
-        </div>
-        <div position="center" title="" style="overflow: hidden; background: url(/Content/Images/Home/bg.jpg) no-repeat  center center">
-            <div id="winlinks">
-                <ul></ul>
-            </div>
-        </div>
-        @*<div position="top" style="background: url(/Content/Images/Home/bgtop.png) repeat-x; height:80px;">
-            <img src="~/Content/Images/Home/logo.jpg" style="float:left" />
-            <h1 style="float:left;padding-top:40px; padding-left:20px;">企业级系统架构设计实战精讲</h1>
-            <img src="~/Content/Images/Home/bgright.png" style="float:right;padding-right:20px;" />
         </div>*@
+        @*<div position="top" style="background: url(/Content/Images/Home/bgtop.png) repeat-x; height:80px;">
+                <img src="~/Content/Images/Home/logo.jpg" style="float:left" />
+                <h1 style="float:left;padding-top:40px; padding-left:20px;">企业级系统架构设计实战精讲</h1>
+                <img src="~/Content/Images/Home/bgright.png" style="float:right;padding-right:20px;" />
+            </div>*@
     </div>
 
 </body>
-
-</html>
 <script type="text/javascript">
     var LINKWIDTH = 90, LINKHEIGHT = 100, TASKBARHEIGHT = 43;
     var winlinksul = $("#winlinks ul");
     function f_open(url, title, icon) {
         var win = $.ligerDialog.open(
             {
-                height: 500, url: url, width: 710, showMax: true, showToggle: true, showMin: true, isResize: true, modal: false, title: title, slide: false, buttons: [
+                height: 500, url: url, width: 730, showMax: true, showToggle: true, showMin: true, isResize: true, modal: false, title: title, slide: false, buttons: [
                     {
                         text: '确定', onclick: function (item, Dialog, index) {
                             win.hide();
@@ -280,3 +279,4 @@
     onResize();
 
 </script>
+</html>
