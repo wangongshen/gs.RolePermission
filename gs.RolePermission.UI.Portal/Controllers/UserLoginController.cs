@@ -1,9 +1,9 @@
 ﻿using gs.RolePermission.Common;
 using gs.RolePermission.IBLL;
-using gs.RolePermission.UI.Portal.Models;
+using gs.RolePermission.Model;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Mvc;
 
@@ -48,33 +48,10 @@ namespace gs.RolePermission.UI.Portal.Controllers
             return File(imgBytes, @"image/jpeg");
         }
 
-
-        public ActionResult ProcessLogin()
+        public ActionResult ProcessLogin(UserInfo userData)
         {
-            //第一步：处理验证码
-            //拿到表单找那个的验证码
-            string strCode = Request["vCode"];//vCode与前台name相同
-            //拿到Session中的验证码
-            string sessionCode = Session["Vcode"] as string;//Session["Vcode"]为object，所以要转为string
-            //这里存在一个bug，就是strCode、sessionCode均为空,解决通过如下5行代码
-            Session["Vcode"] = null;//一拿到Session值就让它为空
-            if (string.IsNullOrEmpty(sessionCode))
-            {
-                return Content("验证码错误！");
-            }
-
-            if (string.IsNullOrEmpty(sessionCode))
-            {
-                return Content("验证码不能为空！");
-            }
-
-            if (strCode != sessionCode)
-            {
-                return Content("验证码错误！");
-            }
-            //第二步：处理验证用户名及密码
-            string name = Request["LoginCode"];
-            string pwd = Request["LoginPwd"];
+            string name = userData.UName;
+            string pwd = userData.Pwd;
             short delNormal = (short)gs.RolePermission.Model.Enum.DelFlagEnum.Normal;
             var userInfo = UserInfoBll.GetEntities(u => u.UName == name && u.Pwd == pwd && u.DelFlag == delNormal).FirstOrDefault();
             if (userInfo == null)

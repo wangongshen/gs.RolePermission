@@ -11,24 +11,9 @@ function AjaxPost(Url,JsonData,LodingFun,ReturnFun) {
         success: ReturnFun
     });
 }
-//示例
-//AjaxPost("ajax调用路径", ajax传参,
-//                function () {
-//                     //ajax加载中
-//                },
-//                function (data) {
-//                    //ajax返回 
-//                    //AjaxErro(data);
-//                })
 
 
-//弹出
-function ErroAlert(e) {
-    var index = layer.alert(e, { icon: 5, time: 2000, offset: 't', closeBtn: 0, title: '错误信息', btn: [], anim: 2, shade: 0 });
-    layer.style(index, {
-        color: '#777'
-    }); 
-}
+
 
 //Ajax 错误返回处理
 function AjaxErro(e) {
@@ -64,7 +49,8 @@ function createCode(e) {
     }
 	if(canGetCookie == 1){
     	setCookie(e, code, 60 * 60 * 60, '/');
-	}else{
+    } else {
+        console.log("code:",code);
 		return code;
 	}
 }
