@@ -178,6 +178,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Ico\ico.ico" />
     <Content Include="Content\Images\Home\3DSMAX.png" />
     <Content Include="Content\Images\Home\Alien Folder.png" />
     <Content Include="Content\Images\Home\anquantuichu.gif" />
