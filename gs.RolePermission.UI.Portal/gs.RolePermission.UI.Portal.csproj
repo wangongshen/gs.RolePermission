@@ -1699,7 +1699,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="UploadFiles\" />
+    <Folder Include="UploadFiles\UploadImgs\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
