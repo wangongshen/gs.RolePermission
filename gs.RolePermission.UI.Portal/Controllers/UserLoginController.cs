@@ -27,7 +27,7 @@ namespace gs.RolePermission.UI.Portal.Controllers
         {
             if (Request.Cookies["userLoginId"] != null)//表示用户没有登录
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "UserLogin");
             }
             return View();
         }

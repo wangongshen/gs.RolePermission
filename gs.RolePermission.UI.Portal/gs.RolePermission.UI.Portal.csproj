@@ -154,6 +154,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderInfoController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Controllers\UserLoginController.cs" />
     <Compile Include="Global.asax.cs">
@@ -178,6 +179,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Error404\css\404.css" />
+    <Content Include="Content\Error404\images\404.jpg" />
     <Content Include="Content\Ico\ico.ico" />
     <Content Include="Content\Images\Home\3DSMAX.png" />
     <Content Include="Content\Images\Home\Alien Folder.png" />
@@ -1697,6 +1700,7 @@
     <Content Include="Views\Home\TreeIndex.cshtml" />
     <Content Include="Views\ActionInfo\Index.cshtml" />
     <Content Include="Views\ActionInfo\Edit.cshtml" />
+    <Content Include="Views\Shared\Error404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -261,6 +261,7 @@
         layui.use('layer', function () {
             //登录处理
             $('input[type="button"]').click(function () {
+                var btnLogin = $("#btnLogin");
                 var login = $('input[name="LoginCode"]').val();
                 var pwd = $('input[name="LoginPwd"]').val();
                 var code = $('input[name="vCode"]').val();
@@ -271,6 +272,7 @@
                 } else if (code.toLowerCase() != CodeVal.toLowerCase()) {
                     ErroAlert('请输入正确的验证码');
                 } else {
+                    btnLogin.enable = true;
                     var data = {
                         "UName": login,
                         "Pwd": pwd
@@ -289,7 +291,7 @@
                                 ErroAlert("登陆失败");
                                 Code();
                             }
-
+                            btnLogin.enable = false;
                         }
                     })
                 }
