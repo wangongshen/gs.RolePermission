@@ -128,6 +128,13 @@
                     handler: function () {
                         addClickEvent();
                     }
+                }, {
+                    id: 'btnSetRole',
+                    text: '设置角色',
+                    iconCls: 'icon-redo',
+                    handler: function () {
+                        setRole();
+                    }
                 },
                 {
                     id: 'btnDelete',
@@ -173,7 +180,45 @@
             initTable(data);//初始化表格并传入该数据，也即让queryParams参数有了数据
         })
     }
-
+    function setRole() {
+        //校验是否只选中一个用户
+        var selectedRows = $('#tt').datagrid("getSelections");
+        if (selectedRows.length != 1) {
+            $.messager.alert("提醒", "请选择要设置角色的一个用户", "warning");
+            return;
+        }
+        //弹出设置角色对话框之前要先根据ID获得当前用户
+        $("#setRoleFrame").attr("src", "/UserInfo/SetRole/" + selectedRows[0].ID)
+        //弹出设置角色对话框
+        $('#setRoleDialogDiv').css("display", "block");
+        $('#setRoleDialogDiv').dialog({
+            title: "设置用户角色",
+            modal: true,
+            width: 460,
+            height: 400,
+            collapsible: true,
+            minimizable: true,
+            maximizable: true,
+            resizable: true,
+            buttons: [{
+                id: 'btnOk',
+                text: '设置',
+                iconCls: 'icon-ok',
+                handler: function () {
+                    $("#setRoleFrame")[0].contentWindow.submitForm();//调用子窗体的submitForm()方法
+                }
+            }, {
+                id: 'btnCancel',
+                text: '取消',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#setRoleDialogDiv').dialog("close");
+                }
+            }],
+            //toolbar: {
+            //}
+        })
+    }
     //当用户点击添加用户的时候，弹出一个添加对话框
     function addClickEvent() {
         $('#addFormDialogDiv').css("display", "block");

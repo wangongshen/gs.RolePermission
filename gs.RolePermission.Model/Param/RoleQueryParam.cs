@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XDZ.RolePermission.Model.Param
+namespace gs.RolePermission.Model.Param
 {
     public class RoleQueryParam:BaseParam
     {

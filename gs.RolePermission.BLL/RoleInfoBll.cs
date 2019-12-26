@@ -1,11 +1,11 @@
 ﻿using gs.RolePermission.IBLL;
 using gs.RolePermission.Model;
+using gs.RolePermission.Model.Param;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using XDZ.RolePermission.Model.Param;
 
 namespace gs.RolePermission.BLL
 {
@@ -14,7 +14,7 @@ namespace gs.RolePermission.BLL
         public IQueryable<RoleInfo> LoadPageData(RoleQueryParam roleQueryParam)
         {
             short normalFlag = (short)gs.RolePermission.Model.Enum.DelFlagEnum.Normal;
-            //拿到未删除的数据
+            //拿到未删除的数据 xx
             var temp = DbSession.RoleInfoDal.GetEntities(u => u.DelFlag == normalFlag);
             //过滤
             if (!string.IsNullOrEmpty(roleQueryParam.SchName))
@@ -34,7 +34,7 @@ namespace gs.RolePermission.BLL
 
         public override void SetCurrentDal()
         {
-            throw new NotImplementedException();
+            CurrentDal = DbSession.RoleInfoDal;
         }
     }
 }

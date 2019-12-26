@@ -14,9 +14,13 @@ namespace gs.RolePermission.UI.Portal.Controllers
     //[MyActionFilterAttribute(Name ="写在类上的过滤器")]
     public class UserInfoController : BaseController
     {
-
+        short delflagNormal = (short)gs.RolePermission.Model.Enum.DelFlagEnum.Normal;
+        short delflagDeleted = (short)gs.RolePermission.Model.Enum.DelFlagEnum.Deleted;
         //IUserInfoBll userInfoBll = new UserInfoBll();
         public IUserInfoBll userInfoBll { get; set; }
+
+        public IRoleInfoBll roleInfoBll { get; set; }
+        
         // GET: UserInfo
         public ActionResult Index()
         {
@@ -125,5 +129,32 @@ namespace gs.RolePermission.UI.Portal.Controllers
             userInfoBll.Add(userInfo);
             return Content("ok");
         }
+
+        #region 设置用户角色
+        public ActionResult SetRole(int id)//这里参数只能是id，为什么？
+        {
+            ////获取当前要设置的用户
+            //int userId = id;
+            //UserInfo user = userInfoBll.GetEntities(u => u.Id == id).FirstOrDefault();
+            ////ViewBag与ViewData一样都是往前台传数据的一个属性，但是ViewBag更好，是一个动态类型，以后尽量用它
+            ////要拿到所有的角色，这就必然要通过RoelInfoBll对象才能拿到，所以还需要把RoelInfoBll属性注入进来本控制器类
+            //short delflagNormal = (short)gs.RolePermission.Model.Enum.DelFlagEnum.Normal;
+            //ViewBag.AllRoles = roleInfoBll.GetEntities(u => u.DelFlag == delflagNormal).ToList();
+            //return View(user);
+            //获取当前要设置的用户
+            int userId = id;
+            UserInfo user = userInfoBll.GetEntities(u => u.Id == id).FirstOrDefault();
+
+            //ViewBag与ViewData一样都是往前台传数据的一个属性，但是ViewBag更好，是一个动态类型，以后尽量用它
+            //要拿到所有的角色，这就必然要通过RoelInfoBll对象才能拿到，所以还需要把RoelInfoBll属性注入进来本控制器类
+
+            ViewBag.AllRoles = roleInfoBll.GetEntities(u => u.DelFlag == delflagNormal).ToList();
+            //拿到了所有角色之后，前台就好展示，接下来就设置前台
+
+            //用户已关联的角色Id发送到前台。Linq查询
+            ViewBag.ExitRoles = (from r in user.RoleInfo select r.Id).ToList();
+            return View(user);
+        }
+        #endregion
     }
 }

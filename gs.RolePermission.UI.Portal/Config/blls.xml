@@ -7,4 +7,6 @@
   </object>
   <object name="ActionInfoBll" type="gs.RolePermission.BLL.ActionInfoBll, gs.RolePermission.BLL" singleton="false" >
   </object>
+  <object name="RoleInfoBll" type="gs.RolePermission.BLL.RoleInfoBll, gs.RolePermission.BLL" singleton="false" >
+  </object>
 </objects>

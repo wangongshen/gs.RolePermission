@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace gs.RolePermission.IDAL
 {
-    public interface IRoleInfoDal : IBaseDal<RoleInfo>
+    public partial interface IRoleInfoDal : IBaseDal<RoleInfo>
     {
     }
 }
