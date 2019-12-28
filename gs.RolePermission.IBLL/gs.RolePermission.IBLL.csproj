@@ -46,6 +46,7 @@
     <Compile Include="IBaseBll.cs" />
     <Compile Include="IOrderInfoBll.cs" />
     <Compile Include="IRoleInfoBll.cs" />
+    <Compile Include="IR_UserInfo_ActionInfoBll.cs" />
     <Compile Include="IUserInfoBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
