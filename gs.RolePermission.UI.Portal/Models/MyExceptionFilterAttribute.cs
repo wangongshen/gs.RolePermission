@@ -11,7 +11,6 @@ namespace gs.RolePermission.UI.Portal.Models
     {
         public override void OnException(ExceptionContext filterContext)
         {
-            Console.WriteLine("323233");
             base.OnException(filterContext);//表示基类的异常处理方法，依然保留，在下面写出自己的异常处理，自己如何处理呢？
             LogHelper.WriteLog(filterContext.Exception.ToString());
         }

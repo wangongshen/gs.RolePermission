@@ -75,9 +75,8 @@
         $('#addFormDialogDiv').css("display", "none");
         $('#editDialogDiv').css("display", "none");
         bindSearchBtnClick();
-        //$('#setRoleDialogDiv').css("display", "none");
-
-        //$('#setActionDialogDiv').css("display", "none");
+        $('#setRoleDialogDiv').css("display", "none");
+        $('#setActionDialogDiv').css("display", "none");
 
 
     });
@@ -135,8 +134,15 @@
                     handler: function () {
                         setRole();
                     }
-                },
-                {
+                }, {
+                    id: 'btnSetAction',
+                    text: '设置特殊权限',
+                    iconCls: 'icon-redo',
+                    handler: function () {
+                        //判断是否选中一个用户进行权限设置，弹出一个权限设置对话框来
+                        setAction();
+                    }
+                }, {
                     id: 'btnDelete',
                     text: '删除',
                     iconCls: 'icon-cancel',
@@ -178,6 +184,50 @@
         $("#btnSearch").click(function () {
             var data = { schName: $("#txtSchName").val(), schRemark: $("#txtSchRemark").val() };//json数据格式。获取前台用户名和备注文本框值
             initTable(data);//初始化表格并传入该数据，也即让queryParams参数有了数据
+        })
+    }
+    //设置特殊权限
+    function setAction() {
+        //校验是否只选中一个用户
+        var selectedRows = $('#tt').datagrid("getSelections");
+        if (selectedRows.length != 1) {
+            $.messager.alert("提醒", "请选择要设置特殊权限的一个用户", "warning");
+            return;
+        }
+        //弹出设置特殊权限对话框之前要先获得当前用户ID
+        $("#setActionFrame").attr("src", "/UserInfo/SetAction/" + selectedRows[0].ID)
+        //弹出设置角色对话框
+        $('#setActionDialogDiv').css("display", "block");
+        $('#setActionDialogDiv').dialog({
+            title: "设置用户特殊权限",
+            modal: true,
+            width: 460,
+            height: 400,
+            collapsible: true,
+            minimizable: true,
+            maximizable: true,
+            resizable: true,
+            buttons: [
+            //    {
+            //    id: 'btnOk',
+            //    text: '设置',
+            //    iconCls: 'icon-ok',
+            //    handler: function () {
+            //        $("#setActionFrame")[0].contentWindow.submitForm();//调用子窗体的submitForm()方法
+            //    }
+            //}, {
+            //    id: 'btnCancel',
+            //    text: '取消',
+            //    iconCls: 'icon-cancel',
+            //    handler: function () {
+            //        $('#setActionDialogDiv').dialog("close");
+
+            //    }
+            //    }
+            ],
+            //toolbar: {
+
+            //}
         })
     }
     function setRole() {

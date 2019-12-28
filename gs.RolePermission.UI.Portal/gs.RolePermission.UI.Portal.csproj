@@ -1706,6 +1706,7 @@
     <Content Include="Views\RoleInfo\Index.cshtml" />
     <Content Include="Views\ActionInfo\SetRole.cshtml" />
     <Content Include="Views\UserInfo\SetRole.cshtml" />
+    <Content Include="Views\UserInfo\SetAction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

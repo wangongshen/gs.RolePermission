@@ -4,6 +4,8 @@
   <object type="gs.RolePermission.UI.Portal.Controllers.UserInfoController, gs.RolePermission.UI.Portal" singleton="false" >
      <property name="userInfoBll" ref="UserInfoBll" />
      <property name="roleInfoBll" ref="RoleInfoBll" />
+     <property name="actionInfoBll " ref="ActionInfoBll" />
+     <property name="r_UserInfo_ActionInfoBll" ref="R_UserInfo_ActionInfoBll" />
   </object>
   <object type="gs.RolePermission.UI.Portal.Controllers.UserLoginController, gs.RolePermission.UI.Portal" singleton="false" >
     <property name="UserInfoBll" ref="UserInfoBll" />

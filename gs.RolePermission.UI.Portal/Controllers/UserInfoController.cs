@@ -18,9 +18,9 @@ namespace gs.RolePermission.UI.Portal.Controllers
         short delflagDeleted = (short)gs.RolePermission.Model.Enum.DelFlagEnum.Deleted;
         //IUserInfoBll userInfoBll = new UserInfoBll();
         public IUserInfoBll userInfoBll { get; set; }
-
         public IRoleInfoBll roleInfoBll { get; set; }
-        
+        public IActionInfoBll actionInfoBll { get; set; }
+        public IR_UserInfo_ActionInfoBll r_UserInfo_ActionInfoBll { get; set; }
         // GET: UserInfo
         public ActionResult Index()
         {
@@ -156,5 +156,28 @@ namespace gs.RolePermission.UI.Portal.Controllers
             return View(user);
         }
         #endregion
+
+        #region 设置特殊权限
+        public ActionResult SetAction(int id)
+        {
+            ViewData.Model = actionInfoBll.GetEntities(u => u.DelFlag == delflagNormal).ToList();
+            //获得当前用户
+            ViewBag.user = userInfoBll.GetEntities(u => u.Id == id).FirstOrDefault();
+            return View();
+        }
+        #endregion
+
+        //删除特殊权限
+        public ActionResult DeleteUserAction(int UId, int ActionId)
+        {
+            var rUserAction = r_UserInfo_ActionInfoBll.GetEntities(r => r.ActionInfoId == ActionId && r.UserInfoId == UId).FirstOrDefault();
+            if (rUserAction != null)
+            {
+                //rUserAction.DelFlag = (short)XDZ.RolePermission.Model.Enum.DelFlagEnum.Deleted;//此句不行，不能更新数据库
+                //也可以采用调用方法来做,都是逻辑删除
+                r_UserInfo_ActionInfoBll.DeleteListByLogical(new List<int>() { rUserAction.Id });
+            }
+            return Content("ok");
+        }
     }
 }

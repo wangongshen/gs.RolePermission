@@ -1,0 +1,66 @@
+﻿@using gs.RolePermission.Model;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SetAction</title>
+    <link href="~/Content/tableStyle.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+           $(".btnDel").click(function () {              
+                //下面就是先判断是否有这个用户权限的数据，有就删除
+                if ($(this).siblings(":checked").length > 0) {
+                    $.post("/UserInfo/DeleteUserAction", { UId: $(this).attr("uId"), ActionId: $(this).attr("actionId") }, function (data) {
+                           //思考：改进下，弹出一个消息告知用户删除成功，而且做成在右下角弹出一个消息提示框，过一会自动消失的那种
+                   });
+                }
+                 //前端删除显示效果
+                $(this).siblings(":radio").attr("checked", false);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <div>
+            @{
+                UserInfo user = ViewBag.user;//把前台传过来的数据ViewBag.user转为UserInfo，这时得导入命名空间（最上面第一句话）
+            }
+            <h3>当前给 @user.UName 设置特殊权限</h3>
+            @{
+                <table class="hovertable">
+                    <tr>
+                        <td>权限Id</td>
+                        <td>权限名</td>
+                        <td>权限地址</td>
+                        <td>请求方法</td>
+                        <td>操作</td>
+                    </tr>
+
+                    @foreach (var actionInfo in Model)
+                    {
+                        string strId = "rd_" + actionInfo.Id;
+                        <tr>
+                            <td>@actionInfo.Id</td>
+                            <td>@actionInfo.ActionName</td>
+                            <td>@actionInfo.Url</td>
+                            <td>@actionInfo.HttpMethod</td>
+                            <td>
+                                <input type="radio" name="@strId" value="1" />允许&nbsp;&nbsp;
+                                <input type="radio" name="@strId" value="0" />拒绝
+                                <input type="button" value="删除" class="btnDel" uId="@user.Id" actionId="@actionInfo.Id" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+    </div>
+</body>
+</html>
