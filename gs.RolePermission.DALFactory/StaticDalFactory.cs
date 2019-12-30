@@ -47,5 +47,14 @@ namespace gs.RolePermission.DALFactory
             Console.WriteLine(",,,,:" + assemblyName);
             return Assembly.Load(assemblyName).CreateInstance(assemblyName + ".RoleInfoDal") as IRoleInfoDal;
         }
+
+        public static IR_UserInfo_ActionInfoDal GetR_UserInfo_ActionInfoDal()
+        {
+            //return new UserInfoDal();//简单工厂创建实例代码 
+            //把上面的new去掉：希望改一个配置那么创建的实例就发生变化，不需要改代码
+            string assemblyName = ConfigurationManager.AppSettings["DalAssemblyName"];
+            Console.WriteLine(",,,,:" + assemblyName);
+            return Assembly.Load(assemblyName).CreateInstance(assemblyName + ".R_UserInfo_ActionInfoDal") as IR_UserInfo_ActionInfoDal;
+        }
     }
 }

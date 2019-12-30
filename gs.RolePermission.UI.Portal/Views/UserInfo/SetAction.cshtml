@@ -13,14 +13,34 @@
     <script src="~/Scripts/jquery-1.7.1.min.js"></script>
     <script type="text/javascript">
         $(function () {
-           $(".btnDel").click(function () {              
+            $(":radio").click(function () {
+                //发送异步请求
+                //拿到用户id、拿到权限id
+                var uId = $(this).attr("uId");
+                var actionId = $(this).attr("actionId");
+                var value = $(this).val()//获取value值，已确定是单击了允许还是拒绝 1--允许  0--拒绝
+                $.post("/UserInfo/SetUserAction", { UId: uId, ActionId: actionId, Value: value }, function (data) {
+                    if (data = "ok") {
+                        alert("设置成功！");
+                    }
+                });
+            });
+            $(".btnDel").click(function () {
+                ////前段删除显示效果
+                //$(this).siblings(":radio").attr("checked", false);
+                ////后台需要删除数据
+                //$.post("/UserInfo/DeleteUserAction", { UId: $(this).attr("uId"), ActionId: $(this).attr("actionId") }, function(data) {
+
+                //});
                 //下面就是先判断是否有这个用户权限的数据，有就删除
                 if ($(this).siblings(":checked").length > 0) {
                     $.post("/UserInfo/DeleteUserAction", { UId: $(this).attr("uId"), ActionId: $(this).attr("actionId") }, function (data) {
-                           //思考：改进下，弹出一个消息告知用户删除成功，而且做成在右下角弹出一个消息提示框，过一会自动消失的那种
-                   });
+                        if (data = "ok") {
+                            alert("删除成功！");
+                        }
+                    });
                 }
-                 //前端删除显示效果
+                //前端删除显示效果
                 $(this).siblings(":radio").attr("checked", false);
             });
         });
@@ -28,39 +48,59 @@
 </head>
 <body>
     <div>
-        <div>
-            @{
-                UserInfo user = ViewBag.user;//把前台传过来的数据ViewBag.user转为UserInfo，这时得导入命名空间（最上面第一句话）
-            }
-            <h3>当前给 @user.UName 设置特殊权限</h3>
-            @{
-                <table class="hovertable">
+        @{
+            string allow = "允许  ";
+            string deny = "拒绝";
+            List<int> exitActionIdList = ViewBag.ExitAction;
+            List<int> delActionIdList = ViewBag.DelAction;
+            UserInfo user = ViewBag.user;//把前台传过来的数据ViewBag.user转为UserInfo，这时得导入命名空间（最上面第一句话）
+        }
+        <h3>当前给 @user.UName 设置特殊权限</h3>
+        <!--下面把所有权限以表格形式展示出来-->
+        @{
+            <table class="hovertable">
+                <tr>
+                    <td>权限Id</td>
+                    <td>权限名</td>
+                    <td>权限地址</td>
+                    <td>请求方法</td>
+                    <td>操作</td>
+                </tr>
+                @foreach (var actionInfo in Model)
+                {
+                    string strId = "rd_" + actionInfo.Id;
                     <tr>
-                        <td>权限Id</td>
-                        <td>权限名</td>
-                        <td>权限地址</td>
-                        <td>请求方法</td>
-                        <td>操作</td>
+                        <td>@actionInfo.Id</td>
+                        <td>@actionInfo.ActionName</td>
+                        <td>@actionInfo.Url</td>
+                        <td>@actionInfo.HttpMethod</td>
+                        <td>
+                            @{
+                                if (exitActionIdList.Contains(actionInfo.Id))
+                                {
+                                    <input type="radio" uId="@user.Id" checked="checked" actionId="@actionInfo.Id" name="@strId" value="1" />@allow
+                                    <input type="radio" uId="@user.Id" actionId="@actionInfo.Id" name="@strId" value="0" />@deny
+                                }
+                                else
+                                {
+                                    if (delActionIdList.Contains(actionInfo.Id))
+                                    {
+                                        <input type="radio" uId="@user.Id" actionId="@actionInfo.Id" name="@strId" value="1" />@allow
+                                        <input type="radio" uId="@user.Id" actionId="@actionInfo.Id" name="@strId" value="0" />@deny
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" uId="@user.Id" actionId="@actionInfo.Id" name="@strId" value="1" />@allow
+                                        <input type="radio" uId="@user.Id" checked="checked" actionId="@actionInfo.Id" name="@strId" value="0" />@deny
+                                    }
+                                }
+                            }
+                            <input type="button" value="删除" class="btnDel" uId="@user.Id" actionId="@actionInfo.Id" />
+                        </td>
                     </tr>
-
-                    @foreach (var actionInfo in Model)
-                    {
-                        string strId = "rd_" + actionInfo.Id;
-                        <tr>
-                            <td>@actionInfo.Id</td>
-                            <td>@actionInfo.ActionName</td>
-                            <td>@actionInfo.Url</td>
-                            <td>@actionInfo.HttpMethod</td>
-                            <td>
-                                <input type="radio" name="@strId" value="1" />允许&nbsp;&nbsp;
-                                <input type="radio" name="@strId" value="0" />拒绝
-                                <input type="button" value="删除" class="btnDel" uId="@user.Id" actionId="@actionInfo.Id" />
-                            </td>
-                        </tr>
-                    }
-                </table>
-            }
-        </div>
+                }
+            </table>
+        }
     </div>
 </body>
 </html>

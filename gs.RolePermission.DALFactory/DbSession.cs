@@ -27,6 +27,12 @@ namespace gs.RolePermission.DALFactory
         {
             get { return StaticDalFactory.GetRoleInfoDal(); }
         }
+
+        public IR_UserInfo_ActionInfoDal R_UserInfo_ActionInfoDal
+        {
+            get { return StaticDalFactory.GetR_UserInfo_ActionInfoDal(); }
+        }
+        
         /// <summary>
         /// 拿到当前EF的上下文对象，然后进行把修改实体进行一个整体提交（简单说该方法就是让上下文提交）
         /// </summary>
