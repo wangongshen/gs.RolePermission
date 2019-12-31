@@ -160,19 +160,9 @@ namespace gs.RolePermission.UI.Portal.Controllers
         #region 设置特殊权限
         public ActionResult SetAction(int id)
         {
+            ViewData.Model = actionInfoBll.GetEntities(u => u.DelFlag == delflagNormal).ToList();
             //获得当前用户
             ViewBag.user = userInfoBll.GetEntities(u => u.Id == id).FirstOrDefault();
-            UserInfo userinfo = ViewBag.user;
-            // ViewData.Model表示强类型传入视图，在前台视图需要指明model的类型
-            ViewData.Model = actionInfoBll.GetEntities(u => u.DelFlag == delflagNormal).ToList();
-
-            //用户已关联的权限Id发送到前台。Linq查询
-            ViewBag.ExitAction = (from r in userinfo.R_UserInfo_ActionInfo
-                                  where r.HasPermission == true && r.UserInfoId == userinfo.Id && r.DelFlag == delflagNormal
-                                  select r.ActionInfoId).ToList();
-            ViewBag.DelAction = (from r in userinfo.R_UserInfo_ActionInfo
-                                 where r.UserInfoId == userinfo.Id && r.DelFlag == delflagDeleted
-                                 select r.ActionInfoId).ToList();
             return View();
         }
         #endregion
@@ -186,27 +176,6 @@ namespace gs.RolePermission.UI.Portal.Controllers
                 //rUserAction.DelFlag = (short)XDZ.RolePermission.Model.Enum.DelFlagEnum.Deleted;//此句不行，不能更新数据库
                 //也可以采用调用方法来做,都是逻辑删除
                 r_UserInfo_ActionInfoBll.DeleteListByLogical(new List<int>() { rUserAction.Id });
-            }
-            return Content("ok");
-        }
-
-        public ActionResult SetUserAction(int UId, int ActionId, int Value)
-        {
-            var rUserAction = r_UserInfo_ActionInfoBll.GetEntities(r => r.ActionInfoId == ActionId && r.UserInfoId == UId && r.DelFlag == delflagNormal).FirstOrDefault();
-            if (rUserAction != null)
-            {
-                //根据单击的允许还是拒绝进行修改，HasPermission为boolBean
-                rUserAction.HasPermission = (Value == 1 ? true : false);
-                r_UserInfo_ActionInfoBll.Update(rUserAction);
-            }
-            else//不存在就加一条记录
-            {
-                R_UserInfo_ActionInfo r_UserInfo_ActionInfo = new R_UserInfo_ActionInfo();
-                r_UserInfo_ActionInfo.ActionInfoId = ActionId;
-                r_UserInfo_ActionInfo.UserInfoId = UId;
-                r_UserInfo_ActionInfo.DelFlag = delflagNormal;
-                r_UserInfo_ActionInfo.HasPermission = (Value == 1 ? true : false);
-                r_UserInfo_ActionInfoBll.Add(r_UserInfo_ActionInfo);
             }
             return Content("ok");
         }
