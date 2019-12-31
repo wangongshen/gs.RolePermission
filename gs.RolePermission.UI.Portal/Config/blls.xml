@@ -9,6 +9,6 @@
   </object>
   <object name="RoleInfoBll" type="gs.RolePermission.BLL.RoleInfoBll, gs.RolePermission.BLL" singleton="false" >
   </object>
-  <object name="R_UserInfo_ActionInfoBll" type="gs.RolePermission.BLL.R_UserInfo_ActionInfoBll, XDZ.RolePermission.BLL" singleton="false" >
-  </object>
+  <!--<object name="R_UserInfo_ActionInfoBll" type="gs.RolePermission.BLL.R_UserInfo_ActionInfoBll, XDZ.RolePermission.BLL" singleton="false" >
+  </object>-->
 </objects>
